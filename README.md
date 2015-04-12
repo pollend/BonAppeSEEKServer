@@ -17,3 +17,22 @@ you have to install the ant debugger.
 ------------------------
 
 cordova run android
+
+#server libraries
+
+express.js
+
+http://expressjs.com/
+
+Jade
+
+http://expressjs.com/guide/using-template-engines.html
+
+http://naltatis.github.io/jade-syntax-docs/
+
+http://jade-lang.com/api/
+
+http://jade-lang.com/reference/case/
+
+
+
