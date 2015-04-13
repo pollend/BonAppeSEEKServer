@@ -23,7 +23,6 @@ home.prototype.body = function()
 {
 	page.prototype.body.call(this);
 	return "./body/home.jade";
-
 }
 
 
