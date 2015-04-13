@@ -16,27 +16,22 @@ global.__config =require("./config.js");
 
 global.__base = __dirname + '/';
 
-var mysql = require('mysql');
-var connection = mysql.createConnection(
-{
-  host     : __config.database_host,
-  user     : __config.database_name,
-  password : __config.database_password
-});
-global.__db = connection;
+
+require("./database/database.js")();
 
 //used for rest interface
 app.get('/rest/',function (req,res){
 
 });
 
- require("./webpage/base.js")(app);
+//sets up the basic web pages displayed
+require("./webpage/base.js")(app);
 
 var server = app.listen(3000, function () {
 
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Created Server at http://%s:%s', host, port);
 
 });
