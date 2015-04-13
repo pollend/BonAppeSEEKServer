@@ -1,0 +1,101 @@
+html, body {
+	height: 100%;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer{
+	margin: 20px 2px;
+	text-align: center;
+}
+
+.footer>.sponser{
+	font-weight: bold;
+	font-size: 15px;
+	padding-bottom: 10px;
+}
+
+.element {
+  .center-block();
+}
+
+.right-content-window>dl{
+	margin-bottom: 10px;
+
+}
+
+.main-content{
+
+}
+
+.right-content-window, .main-content{
+	padding: 5px 10px;
+}
+
+.right-content-window img{
+	width: 100%;
+}
+.clipping-head{
+	overflow: hidden;
+	max-height: 300px;
+}
+
+.business-list>div{
+	padding: 4px 10px;
+}
+.business-list .business_name{
+	font-weight: bold;
+}
+
+.navbar-pilotage{
+	background: rgb(63, 78, 98);
+}
+.navbar-pilotage li.active>a
+{
+	background: rgb(87, 106, 132);
+}
+.navbar-pilotage li>a
+{
+	color: white;
+	font-size: 12pt;
+	font-family: 'Titillium Web', sans-serif;
+}
+.navbar-brand{
+	color: white;
+}
+.navbar-pilotage li>a:hover, .navbar-pilotage li>a:focus{
+background-color: #526376;
+
+}
+@media screen and (min-width:768px) {
+	.center-block{
+		width:100%;
+	}
+
+	.clipping-head{
+		max-height: 500px;
+	}
+
+	.right-content-window dl dt{
+	width: 130px; 
+	}
+	.right-content-window dl dd{
+	margin-left: 135px;
+	}
+
+}
+
+@media screen and (min-width: 992px) {
+	.center-block {
+		width:800px;
+	}
+
+@media screen and (min-width: 1200px) {
+	.center-block {
+		width:1080px;
+	}
+}
