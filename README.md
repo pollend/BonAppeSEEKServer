@@ -12,7 +12,8 @@ http://ionicframework.com/docs/
 
 you have to install the ant debugger.
 
-#Ionic---------------------
+#Ionic
+---------------------
 
 Your Ionic project is ready to go! Some quick tips:
 
