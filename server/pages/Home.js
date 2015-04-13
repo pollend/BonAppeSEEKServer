@@ -20,9 +20,9 @@ Home.prototype.menuName = function()
     return "Home";
 }
 
-Home.prototype.body = function(req,res)
+Home.prototype.body = function()
 {
-	Page.prototype.body.call(this,req,res);
+	Page.prototype.body.call(this);
 	return "./Body/Home.jade";
 
 }

@@ -6,6 +6,7 @@ var jade = require('jade');
 app.set('view engine', 'jade');
 
 
+//linking bower components and public folder
 app.use('/b_public', express.static("bower_components"));
 app.use('/public', express.static("public"));
 
@@ -15,13 +16,16 @@ app.get('/rest/',function (req,res){
 
 });
 
-
-//list out all the associated pages
+//pages
 var pages = [];
-var menu_items = [];
+
+//creates a page object for this association
 var Home = require("./pages/Home");
 pages.push(new Home());
 
+
+//list out all the associated pages
+var menu_items = [];
 for (var i = 0; i < pages.length; i++) 
 {
     if(pages[i].menuName() !== "")
