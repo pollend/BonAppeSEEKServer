@@ -11,6 +11,6 @@
   "dependencies": {
     "express": "^4.12.3",
     "jade": "^1.9.2",
-    "sqlite3": "^3.0.5"
+    "mysql": "^2.6.1"
   }
 }
