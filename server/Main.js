@@ -18,16 +18,25 @@ app.get('/rest/',function (req,res){
 
 //list out all the associated pages
 var pages = [];
-
+var menu_items = [];
 var Home = require("./pages/Home");
 pages.push(new Home());
 
-for (var i = 0; i <pages.length; i++) 
+for (var i = 0; i < pages.length; i++) 
 {
+    if(pages[i].menuName() !== "")
+    {
+        menu_items.push({
+            name:pages[i].menuName(),
+            link:"http://localhost:3000" + pages[i].pageId()});
+    }
+}
 
+for (var i = 0; i < pages.length; i++) 
+{
 	var id = i;
 	 app.get(pages[id].pageId(),function(req,res){
-	 	res.render(pages[id].body(),{})
+	 	res.render(pages[id].body(),{active_menu_name:pages[id].menuName(),menu:menu_items})
 	 });
 }
 

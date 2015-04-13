@@ -14,9 +14,9 @@ Page.prototype.body = function(req)
 
 }
 
-Page.prototype.menuDisplay = function()
+Page.prototype.menuName = function()
 {
-	return false;
+	return "";
 }
 
 Page.prototype.data = function()

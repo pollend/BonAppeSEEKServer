@@ -12,7 +12,12 @@ util.inherits(Home, Page);
 Home.prototype.pageId = function()
 {
 	Page.prototype.pageId.call(this);
-	return "/Home";
+	return "/";
+}
+
+Home.prototype.menuName = function()
+{
+    return "Home";
 }
 
 Home.prototype.body = function(req,res)
