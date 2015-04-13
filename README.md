@@ -36,14 +36,8 @@ Your Ionic project is ready to go! Some quick tips:
 
  * Package an app using Ionic package service: ionic package <MODE> <PLATFORM>
 
-
-
-#Running
-------------------------
-
-cordova run android
-
 #server libraries
+-----------------------------
 
 express.js
 
