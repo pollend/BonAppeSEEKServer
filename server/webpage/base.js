@@ -26,8 +26,17 @@ var base = function(app)
          }
        }
        //render the jade
-       res.render(pages[id].body(),{data:pages[id].data(),active_menu_name:pages[id].menuName(),menu:menu_items})
-   });
+       //
+       pages[id].data(function(output)
+       {
+
+         res.render(pages[id].body(),
+          {
+            data:output,
+            active_menu_name:pages[id].menuName(),
+            menu:menu_items})
+          });
+       })
  }
 
 }

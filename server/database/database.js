@@ -12,6 +12,7 @@ var database = function()
   global.__db = connection;
 
   require("./feature.js").verify();
+  require("./foodItems.js").verify();
 
 }
 

@@ -34,9 +34,9 @@ page.prototype.menuName = function()
  * the data used by the jade parser 
  * @return {string} jade date
  */
-page.prototype.data = function()
+page.prototype.data = function(output)
 {
-	return {};
+	output({});
 }
 
 module.exports = page;

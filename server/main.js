@@ -17,15 +17,21 @@ global.__config =require("./config.js");
 global.__base = __dirname + '/';
 
 
-require("./database/database.js")();
-
 //used for rest interface
 app.get('/rest/',function (req,res){
 
 });
 
+require("./database/database.js")();
 //sets up the basic web pages displayed
 require("./webpage/base.js")(app);
+
+
+require("./database/feature.js").instance("asdfasdfasfeawbef",function()
+{
+    
+});
+
 
 var server = app.listen(3000, function () {
 
