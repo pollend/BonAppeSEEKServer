@@ -11,8 +11,9 @@ var database = function()
   });
   global.__db = connection;
 
-  require("./feature.js").verify();
+  require("./features.js").verify();
   require("./foodItems.js").verify();
+  require("./relationFoodItemFeature.js").verify();
 
 }
 

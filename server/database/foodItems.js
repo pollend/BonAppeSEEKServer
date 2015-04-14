@@ -1,6 +1,5 @@
-
-var _table = "foodItems";
-var feature = require("./feature.js");
+var relationFoodItemFeature = require("./relationFoodItemFeature.js");
+var feature = require("./features.js");
 
 var foodItem = function(result)
 {
@@ -8,13 +7,34 @@ var foodItem = function(result)
     this._foodItem = result.foodItem;
 }
 
-foodItem.prototype.getFeatures = function(callback)
-{
+foodItem.prototype.addFeature = function(feature) {
+  
+};
 
-}
+//converts to json format
+foodItem.prototype.toJson = function(first_argument) {
+  return {
+    id:this._id,
+    foodItem : this._foodItem
+  };
+};
+
+foodItem.prototype.getId = function() {
+  return this._id;
+};
+
+//get the food Item
+foodItem.prototype.getFoodItem = function() {
+  return this._foodItem;
+};
+
+//set food Item
+foodItem.prototype.setFoodItem = function(value) {
+  this._foodItem = value;
+};
 
 foodItem.prototype.commit = function() {
-    __db.query("UPDATE " + _table + " SET foodItem = ?",[this._feature],function(err,results)
+    __db.query("UPDATE foodItems SET foodItem = ? WHERE id = ?",[this._feature,this._id],function(err,results)
   {
     if(err)
     {
@@ -29,7 +49,7 @@ foodItem.prototype.commit = function() {
 
 var _foodItemById = function(id,callback)
 {
-   var query = __db.query("SELECT * FROM " + _table + " WHERE id = ?",[id],function(err, results)
+   var query = __db.query("SELECT * FROM foodItems WHERE id = ?",[id],function(err, results)
     {
         if(err)
         {  
@@ -49,7 +69,7 @@ var _foodItemById = function(id,callback)
 var _instance = function(name, callback)
 {
   var lfoodItem = {foodItem : name};
-  var query = __db.query("INSERT INTO "+ _table +" SET ?",lfoodItem, function(err,results){
+  var query = __db.query("INSERT INTO foodItems SET ?",lfoodItem, function(err,results){
     if(err)
     {  
       callback(null);
@@ -63,7 +83,7 @@ var _instance = function(name, callback)
 var _searchFoodItemByName = function(name,callback)
 {
 
-  var query = __db.query("SELECT * FROM " + _table + " WHERE foodItem LIKE ?",[name],function(err, results)
+  var query = __db.query("SELECT * FROM foodItems WHERE foodItem LIKE ?",[name],function(err, results)
   {
       var lfeatures = [];
       console.log(err)
@@ -77,7 +97,7 @@ var _searchFoodItemByName = function(name,callback)
 
 var _verify = function()
 {
- __db.query("CREATE TABLE IF NOT EXISTS  `"+ _table+"` ( \
+ __db.query("CREATE TABLE IF NOT EXISTS  `foodItems` ( \
   `id` INT AUTO_INCREMENT, \
   `foodItem` VARCHAR(45) , \
   PRIMARY KEY (`id`), \
@@ -88,8 +108,7 @@ module.exports = {
  instance : _instance,
  byId : _foodItemById,
  search : _searchFoodItemByName,
- verify : _verify,
- table : _table,
+ verify : _verify
  _foodItem : foodItem
 };
 

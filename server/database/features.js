@@ -1,7 +1,3 @@
-
-
-var _table = "features";
-
 var feature = function(id,feature)
 {
   console.log(id +"," + feature);
@@ -9,8 +5,27 @@ var feature = function(id,feature)
   this._feature = feature;
 }
 
+feature.prototype.getFeature = function() {
+  return this._feature;
+};
+
+feature.prototype.toJson = function() {
+  return {
+    id : this._id,
+    feature : this._feature
+  }
+};
+
+feature.prototype.setFeature = function(value) {
+  this._feature = value;
+};
+
+feature.prototype.getId = function() {
+  return this._id;
+};
+
 feature.prototype.commit = function(callback) {
-  __db.query("UPDATE " + _table + " SET feature = ?",[this._feature],function(err,results)
+  __db.query("UPDATE features SET feature = ? WHERE id = ?",[this._feature,this._id],function(err,results)
   {
     if(err)
     {
@@ -25,7 +40,7 @@ feature.prototype.commit = function(callback) {
 
 var _featureById = function(id, callback)
 {
-  var query = __db.query("SELECT * FROM " + _table + " WHERE id = ?",[id],function(err, results)
+  var query = __db.query("SELECT * FROM features WHERE id = ?",[id],function(err, results)
     {
         if(err)
         {  
@@ -45,7 +60,7 @@ var _featureById = function(id, callback)
 var _instance = function(name,callback)
 {
   var lfeature = {feature : name};
-  var query = __db.query("INSERT INTO "+ _table +" SET ?",lfeature, function(err,results){
+  var query = __db.query("INSERT INTO features SET ?",lfeature, function(err,results){
     console.log(err);
     if(err)
     {  
@@ -61,7 +76,7 @@ var _instance = function(name,callback)
 var _searchByFeatureName = function(name,callback)
 {
 
-    var query = __db.query("SELECT * FROM " + _table + " WHERE feature LIKE ?",[name],function(err, results)
+    var query = __db.query("SELECT * FROM features WHERE feature LIKE ?",[name],function(err, results)
     {
         if(err)
         {  
@@ -80,7 +95,7 @@ var _searchByFeatureName = function(name,callback)
 
 var _verify = function()
 {
- __db.query("CREATE TABLE IF NOT EXISTS  `"+ _table+"` ( \
+ __db.query("CREATE TABLE IF NOT EXISTS  `features` ( \
   `id` INT AUTO_INCREMENT, \
   `feature` VARCHAR(45) , \
   PRIMARY KEY (`id`), \
@@ -92,7 +107,6 @@ module.exports = {
  byId : _featureById,
  search : _searchByFeatureName,
  verify : _verify,
- table : _table,
  _feature :feature
 };
 

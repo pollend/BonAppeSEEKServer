@@ -27,11 +27,6 @@ require("./database/database.js")();
 require("./webpage/base.js")(app);
 
 
-require("./database/feature.js").instance("asdfasdfasfeawbef",function()
-{
-    
-});
-
 
 var server = app.listen(3000, function () {
 
