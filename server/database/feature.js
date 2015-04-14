@@ -92,6 +92,7 @@ module.exports = {
  byId : _featureById,
  search : _searchByFeatureName,
  verify : _verify,
- table : _table
+ table : _table,
+ _feature :feature
 };
 

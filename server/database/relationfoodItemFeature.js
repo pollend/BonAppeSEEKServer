@@ -1,9 +1,13 @@
-var foodItemFeature = function()
+foodItem = require("./foodItem.js");
+feature = require("./feature.js");
+
+
+
+var _getFoodItems = function(feature)
 {
 
 }
 
-
-foodItemFeature.prototype.commit = function() {
-	// body...
-};
+module.exports = {
+	
+}

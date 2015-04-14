@@ -1,11 +1,16 @@
 
 var _table = "foodItems";
+var feature = require("./feature.js");
 
-
-var foodItem = function(id,foodItem)
+var foodItem = function(result)
 {
-    this._id = id;
-    this._foodItem = foodItem;
+    this._id = result.id;
+    this._foodItem = result.foodItem;
+}
+
+foodItem.prototype.getFeatures = function(callback)
+{
+
 }
 
 foodItem.prototype.commit = function() {
@@ -35,7 +40,7 @@ var _foodItemById = function(id,callback)
         var lfeatures = null;
         for(var x = 0; x < results.length; x++)
         {
-            lfeatures = new foodItem(results[x].id,results[x].foodItem);
+            lfeatures = new foodItem(results[x]);
         }
         callback(lfeatures);
     });
@@ -51,7 +56,7 @@ var _instance = function(name, callback)
       console.log(err)
     }
   
-    callback(new foodItem(results.insertId,name))
+    callback(new foodItem({id : results.insertId, foodItem : name}))
   });
 }
 
@@ -64,7 +69,7 @@ var _searchFoodItemByName = function(name,callback)
       console.log(err)
       for(var x = 0; x < results.length; x++)
       {
-          lfeatures.push(new feature(results[x].id,results[x].feature));
+          lfeatures.push(new foodItem(results[x]));
       }
       callback(lfeatures);
   });
@@ -84,6 +89,7 @@ module.exports = {
  byId : _foodItemById,
  search : _searchFoodItemByName,
  verify : _verify,
- table : _table
+ table : _table,
+ _foodItem : foodItem
 };
 
