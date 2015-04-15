@@ -1,4 +1,4 @@
-var relationFoodItemFeature = require("./relationFoodItemFeature.js");
+var relationFoodItemFeature = require("./relationFoodItemFeatures.js");
 var feature = require("./features.js");
 
 var foodItem = function(result)
