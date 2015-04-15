@@ -108,7 +108,7 @@ module.exports = {
  instance : _instance,
  byId : _foodItemById,
  search : _searchFoodItemByName,
- verify : _verify
+ verify : _verify,
  _foodItem : foodItem
 };
 

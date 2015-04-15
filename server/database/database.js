@@ -13,7 +13,7 @@ var database = function()
 
   require("./features.js").verify();
   require("./foodItems.js").verify();
-  require("./relationFoodItemFeature.js").verify();
+  require("./relationFoodItemFeatures.js").verify();
 
 }
 

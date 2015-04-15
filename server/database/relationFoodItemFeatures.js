@@ -1,5 +1,5 @@
 foodItems = require("./foodItems.js");
-feature = require("./features.js");
+features = require("./features.js");
 
 var _getFoodItems = function(feature,callback)
 {
@@ -29,12 +29,12 @@ var _getFeatures = function(foodItem,callback)
     callback(null);
     console.log(err);
    }
-   var lfoodItems = [];
+   var lfeatures = [];
    for(var x = 0; x < results.length; x++)
    {
-    lfoodItems.push(new foodItems._foodItem(results[x]));
+    lfeatures.push(new features._feature(results[x]));
    }
-   callback(lfoodItems);
+   callback(lfeatures);
  });
 }
 
