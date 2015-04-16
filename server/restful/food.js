@@ -10,7 +10,7 @@ feature.prototype.pageId = function() {
 
 feature.prototype.output = function(callback,req)
 {
-
+	
 	if(req.query.hasOwnProperty("id"))
 	{
 
