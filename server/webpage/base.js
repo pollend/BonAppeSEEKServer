@@ -1,18 +1,6 @@
-var base = function(app)
+var createWebpage = function(pages,id,app)
 {
-
- //pages
- var pages = [];
-
- //creates a page object for this association
- var home = require("./home");
- pages.push(new home());
-
-
- for (var i = 0; i < pages.length; i++) 
- {
-   var id = i;
-   app.get(pages[id].pageId(),function(req,res){
+ app.get(pages[id].pageId(),function(req,res){
     
        //list out all the associated pages
        var menu_items = [];
@@ -36,7 +24,24 @@ var base = function(app)
             active_menu_name:pages[id].menuName(),
             menu:menu_items})
           });
-       })
+       });
+}
+
+var base = function(app)
+{
+
+ //pages
+ var pages = [];
+
+ //creates a page object for this association
+ var home = require("./home");
+ pages.push(new home());
+
+
+ for (var i = 0; i < pages.length; i++) 
+ {
+  createWebpage(pages,i,app);
+  
  }
 
 }

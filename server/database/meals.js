@@ -7,8 +7,7 @@ var meal = function(result)
 }
 
 meal.prototype.getFoods = function(callback) {
-  relationFoodsMeals.getFoods(this,callback);
-  
+  relationFoodsMeals.getFoods(this,callback);  
 };
 
 meal.prototype.addFood = function(food, callback) {
@@ -74,6 +73,26 @@ var _search = function(name, callback)
   });
 }
 
+var _mealById = function(id,callback)
+{
+   var query = __db.query("SELECT * FROM meals WHERE id = ?",[id],function(err, results)
+    {
+        if(err)
+        {  
+          callback(null);
+          console.log(err)
+        }
+
+        var lmeals = null;
+        console.log(results);
+        for(var x = 0; x < results.length; x++)
+        {
+            lmeals = new meal(results[x]);
+        }
+        callback(lmeals);
+    });
+}
+
 var _instance = function(name,callback)
 {
    var lmeal = {
@@ -87,7 +106,7 @@ var _instance = function(name,callback)
     }
     else
     {
-     callback(new foodItem({"id" : results.insertId, "name" : name}))
+     callback(new meal({"id" : results.insertId, "name" : name}))
     }
   });
 }
@@ -97,5 +116,6 @@ module.exports = {
  verify : _verify,
  search : _search,
  instance : _instance,
+ byId : _mealById,
  _meal : meal
 }

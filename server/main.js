@@ -16,16 +16,12 @@ global.__config =require("./config.js");
 
 global.__base = __dirname + '/';
 
-
-//used for rest interface
-app.get('/rest/',function (req,res){
-
-});
-
 require("./database/database.js")();
 //sets up the basic web pages displayed
 require("./webpage/base.js")(app);
 
+//used for rest interface
+require("./restful/base.js")(app);
 
 
 var server = app.listen(3000, function () {

@@ -10,7 +10,7 @@ reset.prototype.pageId = function()
 
 }
 
-reset.prototype.output = function(callback)
+reset.prototype.output = function(callback,req)
 {
 	callback({});
 }

@@ -14,7 +14,7 @@ food.prototype.addFeature = function(feature,callback) {
   relationFoodItemFeature.createRelationPair(this,feature,callback);
 }
 
-food.prototype.getFeatures = function()
+food.prototype.getFeatures = function(callback)
 {
   relationFoodItemFeature.getFeatures(this,callback);
 }
@@ -28,10 +28,13 @@ food.prototype.getMeals = function(callback) {
 };
 
 //converts to json format
-food.prototype.toJson = function(first_argument) {
+food.prototype.toJson = function() {
   return {
-    id:this._id,
-    name : this._name
+    "id":this._id,
+    "name" : this._name,
+    "image" : this._image,
+    "nutritionImage" : this._nutritionImage
+
   };
 };
 
@@ -83,7 +86,7 @@ food.prototype.commit = function(callback) {
 };
 
 
-var _foodItemById = function(id,callback)
+var _foodById = function(id,callback)
 {
    var query = __db.query("SELECT * FROM foods WHERE id = ?",[id],function(err, results)
     {
@@ -94,9 +97,10 @@ var _foodItemById = function(id,callback)
         }
 
         var lfeatures = null;
+        console.log(results);
         for(var x = 0; x < results.length; x++)
         {
-            lfeatures = new foodItem(results[x]);
+            lfeatures = new food(results[x]);
         }
         callback(lfeatures);
     });
@@ -116,7 +120,7 @@ var _instance = function(name,image,nutritionImage, callback)
       console.log(err)
     }
   
-    callback(new foodItem({id : results.insertId, foodItem : name}))
+    callback(new food({id : results.insertId, foodItem : name}))
   });
 }
 
@@ -125,13 +129,18 @@ var _search = function(name,callback)
 
   var query = __db.query("SELECT * FROM foods WHERE name LIKE ?",[name],function(err, results)
   {
-      var lfeatures = [];
+    if(err)
+    {
+     
       console.log(err)
+    }
+    console.log(results);
+      var lfoods = [];
       for(var x = 0; x < results.length; x++)
       {
-          lfeatures.push(new foodItem(results[x]));
+          lfoods.push(new food(results[x]));
       }
-      callback(lfeatures);
+      callback(lfoods);
   });
 }
 
@@ -148,7 +157,7 @@ var _verify = function()
 
 module.exports = {
  instance : _instance,
- byId : _foodItemById,
+ byId : _foodById,
  search : _search,
  verify : _verify,
  _food : food
