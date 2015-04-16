@@ -12,8 +12,10 @@ var database = function()
   global.__db = connection;
 
   require("./features.js").verify();
-  require("./foodItems.js").verify();
-  require("./relationFoodItemFeatures.js").verify();
+  require("./foods.js").verify();
+  require("./meals.js").verify();
+  require("./relationFoodsFeatures.js").verify();
+  require("./relationFoodsMeals.js").verify();
 
 }
 
