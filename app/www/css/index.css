@@ -36,7 +36,7 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    text-transform:none;
     width:100%;
 }
 
@@ -95,7 +95,17 @@ body {
     font-size: 35px;
     font-family: cicle_gordita;
     text-shadow: 2px 2px #009688;
-    text-transform: lowercase;
+    text-transform: none;
+    font-weight: normal;
+    color: #35A79C;
+    position: center;
+}
+
+#pec{
+    font-size: 35px;
+    font-family: cicle_gordita;
+    text-shadow: 2px 2px #009688;
+    text-transform: none;
     font-weight: normal;
     color: #35A79C;
     padding-top: 5%;
@@ -106,7 +116,7 @@ body {
     color: #35A79C;
     text-shadow: 2px 2px #009688;
     font-family: cicle_gordita;
-    text-transform: lowercase;
+    text-transform: none;
     font-weight: normal;
     padding-top: 5%;
     position: center;  
@@ -117,7 +127,7 @@ body {
     color: #35A79C;
     text-shadow: 2px 2px #009688;
     font-family: cicle_gordita;
-    text-transform: lowercase;
+    text-transform: none;
     font-weight: normal;
     padding-top: 5%;
     position: center;  
