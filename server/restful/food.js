@@ -19,9 +19,19 @@ food.prototype.output = function(callback, req) {
                 //checks for the get property
                 if (req.query.hasOwnProperty("get")) {
                     if (req.query.get === "features") {
-                        result.getFeatures(function(results) {
-                            callback(table.entriresToJson(results));
-                        });
+                        if (req.query.hasOwnProperty("search")) {
+                            result.searchFeatures(req.query.search, function(results) {
+                                if (results) {
+                                    callback(table.entriresToJson(results));
+                                } else callback(errors.empty);
+                            });
+                        } else {
+                            result.getFeatures(function(results) {
+                                if (results) {
+                                    callback(table.entriresToJson(results));
+                                } else callback(errors.empty);
+                            });
+                        }
                     } else if (req.query.get === "meals") {
                         result.getMeals(function(results) {
                             callback(table.entriresToJson(results));
