@@ -12,7 +12,7 @@ app.use('/public', express.static("public"));
 
 
 //globals------------------------------------------------------------------
-global.__config =require("./config.js");
+global.__config = require("./config.js");
 
 global.__base = __dirname + '/';
 
@@ -23,12 +23,11 @@ require("./webpage/base.js")(app);
 //used for rest interface
 require("./restful/base.js")(app);
 
+var server = app.listen(3000, function() {
 
-var server = app.listen(3000, function () {
+	var host = server.address().address;
+	var port = server.address().port;
 
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Created Server at http://%s:%s', host, port);
+	console.log('Created Server at http://%s:%s', host, port);
 
 });

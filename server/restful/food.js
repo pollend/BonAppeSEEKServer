@@ -1,95 +1,43 @@
 var foods = require("./../database/foods.js");
+var table = require("./../database/table.js");
+var errors = require("./errors.js");
 
-var feature = function()
-{
-}
+var food = function() {}
 
-feature.prototype.pageId = function() {
-	return "food";
+food.prototype.pageId = function() {
+    return "food";
 };
 
-feature.prototype.output = function(callback,req)
-{
-	
-	if(req.query.hasOwnProperty("id"))
-	{
+food.prototype.output = function(callback, req) {
 
-		foods.byId(req.query.id,function(result)
-		{
-				if(result)
-				{
-					if(req.query.hasOwnProperty("get"))
-					{
-						if(req.query.get === "features")
-						{
-							result.getFeatures(function(results)
-							{
-								var lfeatures = [];
-								for(var x = 0; x < results.length; x++)
-								{
-									lfeatures.push(results[x].toJson());
-								}
-								callback(lfeatures);
+    if (req.query.hasOwnProperty("id")) {
 
-							});
-						}
-						else if(req.query.get === "meals")
-						{
-							result.getMeals(function(results)
-								{
-									var lmeals = [];
-									for(var x = 0; x < results.length; x++)
-									{
-										lfeatures.push(results[x].toJson());
-									}
-									callback(lmeals);
-
-								});	
-						}
-						else
-						{
-							callback({"error":"Illegal get request"});
-						}
-
-					}
-					else
-					{
-						callback(result.toJson());
-					}
-				}
-				else
-				{
-					callback({"error":"Illegal Id"});
-				}
-		});
-		
-	}
-	else if(req.query.hasOwnProperty("search"))
-	{
-
-			foods.search(req.query.search,function(result)
-			{
-					if(result)
-					{
-						var lfoods = [];
-						for(var x = 0; x < result.length; x++)
-						{
-							lfoods.push(result[x].toJson());
-						}
-						callback(lfoods);
-					}
-					else
-					{
-						callback({"error":"Illegal Id"});
-					}
-			}); 
-	}
-	else
-	{
-		callback({"error":"error"});
-	}
+        foods.byId(req.query.id, function(result) {
+            if (result) {
+                //checks for the get property
+                if (req.query.hasOwnProperty("get")) {
+                    if (req.query.get === "features") {
+                        result.getFeatures(function(results) {
+                            callback(table.entriresToJson(results));
+                        });
+                    } else if (req.query.get === "meals") {
+                        result.getMeals(function(results) {
+                            callback(table.entriresToJson(results));
+                        });
+                    } else callback(errors.get);
+                    //returns the id result
+                } else callback(result.toJson());
+            } else callback(errors.empty);
+        });
+    } else if (req.query.hasOwnProperty("search")) {
+        foods.search(req.query.search, function(results) {
+            if (results) {
+                callback(table.entriresToJson(results));
+            } else callback(errors.empty);
+        });
+    } else callback(errors.general);
 
 
 }
 
-module.exports = feature;
+module.exports = food;

@@ -1,28 +1,22 @@
 var util = require("util");
 
-var home =  function()
-{
-}
+var home = function() {}
 
 
-home.prototype.pageId = function()
-{
+home.prototype.pageId = function() {
 	return "/";
 }
 
-home.prototype.menuName = function()
-{
- return "home";
+home.prototype.menuName = function() {
+	return "home";
 }
 
-home.prototype.body = function()
-{
+home.prototype.body = function() {
 	return "./body/home.jade";
 }
 
-home.prototype.data = function(output)
-{
- output({});
+home.prototype.data = function(output) {
+	output({});
 }
 
 
