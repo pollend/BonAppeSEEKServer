@@ -29,6 +29,21 @@ var _getMeals = function(food, callback) {
     });
 }
 
+var _searchMeals = function(food,search, callback) {
+    __db.query("SELECT meals.* , relationFoodsMeals.* FROM meals INNER JOIN relationFoodsMeals ON meals.id = relationFoodsMeals.mealId WHERE relationFoodsMeals.foodId = ? AND meals.name LIKE ?", [food.getId(),search], function(err, results) {
+        if (err) {
+            callback(null);
+            console.log(err);
+        }
+        var lfoodItems = [];
+        for (var x = 0; x < results.length; x++) {
+            lfoodItems.push(new meals._meal(results[x]));
+        }
+        callback(lfoodItems);
+    });
+}
+
+
 var _verify = function() {
     __db.query("CREATE TABLE IF NOT EXISTS  `relationFoodsMeals` ( \
   `foodId` INT NULL, \
@@ -66,6 +81,7 @@ module.exports = {
     verify: _verify,
     createRelationPair: _createRelationPair,
     getFoods: _getFoods,
-    getMeals: _getMeals
+    getMeals: _getMeals,
+    searchMeals : _searchMeals
 
 }

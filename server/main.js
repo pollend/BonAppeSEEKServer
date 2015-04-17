@@ -16,18 +16,24 @@ global.__config = require("./config.js");
 
 global.__base = __dirname + '/';
 
+
+//initialize --------------------------------------------------------------
+//
+//creates the database model
 require("./database/database.js")();
+
 //sets up the basic web pages displayed
 require("./webpage/base.js")(app);
 
 //used for rest interface
 require("./restful/base.js")(app);
 
+//creates the server-------------------------------------------------------
 var server = app.listen(3000, function() {
 
-	var host = server.address().address;
-	var port = server.address().port;
+    var host = server.address().address;
+    var port = server.address().port;
 
-	console.log('Created Server at http://%s:%s', host, port);
+    console.log('Created Server at http://%s:%s', host, port);
 
 });

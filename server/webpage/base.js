@@ -1,24 +1,14 @@
+var defaultMenu = require("./menu/defaultMenu.js");
+
 var createWebpage = function(pages, id, app) {
     app.get(pages[id].pageId(), function(req, res) {
 
-        //list out all the associated pages
-        var menu_items = [];
-        for (var i = 0; i < pages.length; i++) {
-            if (pages[i].menuName() !== "") {
-                menu_items.push({
-                    name: pages[i].menuName(),
-                    link: __config.url + pages[i].pageId()
-                });
-            }
-        }
-
         //render the jade
         pages[id].data(function(output) {
-
             res.render(pages[id].body(), {
-                data: output,
-                active_menu_name: pages[id].menuName(),
-                menu: menu_items
+                URL: __config.url,
+                menus: defaultMenu,
+                data: output
             });
         });
     });
