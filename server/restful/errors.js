@@ -5,9 +5,9 @@ module.exports = {
     "general": {
         "error": "illegal input"
     },
-    "get" {
+    "get": {
         "error": "unknown get"
-    }
+    },
     "empty": {
         "error": "no entries found"
     }

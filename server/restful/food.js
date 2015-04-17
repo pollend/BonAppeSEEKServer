@@ -2,7 +2,9 @@ var foods = require("./../database/foods.js");
 var table = require("./../database/table.js");
 var errors = require("./errors.js");
 
-var food = function() {}
+var food = function() {
+
+};
 
 food.prototype.pageId = function() {
     return "food";
@@ -38,6 +40,6 @@ food.prototype.output = function(callback, req) {
     } else callback(errors.general);
 
 
-}
+};
 
 module.exports = food;
