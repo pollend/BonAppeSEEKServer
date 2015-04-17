@@ -7,19 +7,20 @@ var food = function(result) {
     this._name = result.name;
     this._image = result.image;
     this._nutritionImage = result.nutritionImage;
-}
+};
 
 food.prototype.addFeature = function(feature, callback) {
     relationFoodItemFeature.createRelationPair(this, feature, callback);
-}
+};
 
 food.prototype.getFeatures = function(callback) {
     relationFoodItemFeature.getFeatures(this, callback);
-}
+};
 
 food.prototype.searchFeatures = function(search, callback) {
     relationFoodItemFeature.searchFeatures(this, search, callback);
 };
+
 
 food.prototype.addMeal = function(meal, callback) {
     relationFoodsMeals.createRelationPair(this, meal, callback);
@@ -103,7 +104,7 @@ var _foodById = function(id, callback) {
     });
 }
 
-var _instance = function(name, image, nutritionImage, callback) {
+var _create = function(name, image, nutritionImage, callback) {
     var lfoodItem = {
         "name": name,
         "image": image,
@@ -120,14 +121,14 @@ var _instance = function(name, image, nutritionImage, callback) {
             foodItem: name
         }))
     });
-}
+};
 
 var _search = function(name, callback) {
 
     var query = __db.query("SELECT * FROM foods WHERE name LIKE ?", [name], function(err, results) {
         if (err) {
 
-            console.log(err)
+            console.log(err);
         }
         console.log(results);
         var lfoods = [];
@@ -136,7 +137,7 @@ var _search = function(name, callback) {
         }
         callback(lfoods);
     });
-}
+};
 
 var _verify = function() {
     __db.query("CREATE TABLE IF NOT EXISTS  `foods` ( \
@@ -149,7 +150,7 @@ var _verify = function() {
 }
 
 module.exports = {
-    instance: _instance,
+    create: _create,
     byId: _foodById,
     search: _search,
     verify: _verify,

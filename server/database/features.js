@@ -28,6 +28,9 @@ feature.prototype.getName = function() {
     return this._name;
 };
 
+/**
+ * set the name for the feature
+ */
 feature.prototype.setName = function(value) {
     this._name = value;
 };
@@ -64,18 +67,20 @@ var _featureById = function(id, callback) {
     });
 }
 
-var _instance = function(name, callback) {
+var _create = function(name, callback) {
     var lfeature = {
         "name": name
     };
     var query = __db.query("INSERT INTO features SET ?", lfeature, function(err, results) {
-        console.log(err);
         if (err) {
             callback(null);
             console.log(err)
         }
 
-        callback(new feature(results.insertId, name))
+        callback(new feature({
+            "id": results.insertId,
+            "name": name
+        }));
     });
 }
 
@@ -105,7 +110,7 @@ var _verify = function() {
 }
 
 module.exports = {
-    instance: _instance,
+    create: _create,
     byId: _featureById,
     search: _searchByName,
     verify: _verify,

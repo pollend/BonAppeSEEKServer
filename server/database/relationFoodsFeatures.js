@@ -29,6 +29,7 @@ var _searchFoods = function(feature, search, callback) {
     });
 }
 
+
 var _getFeatures = function(food, callback) {
     __db.query("SELECT features.* , relationFoodsFeatures.* FROM features INNER JOIN relationFoodsFeatures ON features.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.foodId = ?", [food.getId()], function(err, results) {
         if (err) {
@@ -97,7 +98,7 @@ module.exports = {
     createRelationPair: _createRelationPair,
     getFoods: _getFoods,
     searchFoods: _searchFoods,
-    getFeatures: _getFeatures
+    getFeatures: _getFeatures,
     searchFeatures: _searchFeatures
 
 }

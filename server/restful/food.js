@@ -49,7 +49,6 @@ food.prototype.output = function(callback, req) {
         });
     } else callback(errors.general);
 
-
 };
 
 module.exports = food;

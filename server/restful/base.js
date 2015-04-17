@@ -3,7 +3,9 @@ var _createRest = function(interfaces, id, app) {
     app.get("/rest/" + interfaces[id].pageId(), function(req, res) {
         console.log(req.query);
         interfaces[id].output(function(json) {
-            res.send(json);
+            res.send({
+                data: json
+            });
         }, req);
     });
 }
