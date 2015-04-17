@@ -1,5 +1,5 @@
 mixin menu_item(link,name)
- a(href=link)
+ a(href= URL + link )
   =name
 
 nav(class="navbar navbar-default")
@@ -16,13 +16,13 @@ nav(class="navbar navbar-default")
      
   div(class="collapse navbar-collapse" id="bs-example-navbar-collapse-1")
    ul(class="nav navbar-nav")
-    each menu_item in menu
+    each menu_item in menus
      if menu_item.name = active_menu_name
       li(class=active)
-       +menu_item(menu_item.link,menu_item.name)
+       +menu_item(menu_item.link,menu_item.value)
      else
       li
-       +menu_item(menu_item.link,menu_item.name)
+       +menu_item(menu_item.link,menu_item.value)
    ul(class="nav navbar-nav navbar-right")
     li
      button(type="button" class="btn btn-default navbar-btn")

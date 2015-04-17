@@ -1,9 +1,13 @@
 module.exports = [{
-    "name": "der"
+    "link": "/test",
+    "value": "test"
 }, {
-    "name": "der"
+    "link": "/derp",
+    "value": "test"
 }, {
-    "name": "der"
+    "link": "/der",
+    "value": "test"
 }, {
-    "name": "der"
+    "link": "/der",
+    "value": "test"
 }];

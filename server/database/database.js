@@ -1,13 +1,14 @@
 var database = function() {
 
     var mysql = require('mysql');
-    var connection = mysql.createConnection({
+
+    var pool = mysql.createPool({
         host: __config.database_host,
         user: __config.database_user,
         password: __config.database_password,
         database: __config.database_name
     });
-    global.__db = connection;
+    global.__db = pool;
 
     require("./features.js").verify();
     require("./foods.js").verify();

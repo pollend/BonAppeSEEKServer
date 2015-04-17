@@ -30,6 +30,10 @@ food.prototype.getMeals = function(callback) {
     relationFoodsMeals.getMeals(this, callback);
 };
 
+food.prototype.searchMeals = function(serach,callback) {
+    relationFoodsMeals.searchMeals(this,search,callback);
+};
+
 
 //converts to json format
 food.prototype.toJson = function() {

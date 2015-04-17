@@ -1,7 +1,19 @@
 html
- include ./../head.jade
+ head
+  include ./../head.jade
+  script(src='/public/js/account.js')
  body
   include ./../menu.jade
-  div(class="center-block")
-   this is some content
+  div(class="center-block" ng-app="account")
+   div(class="row")
+    div(class="col-md-6")
+     |this is the name of the app
+    div(class="col-md-6")
+     div(ng-controller="login")
+      form(ng-submit="login()")
+       input(type="text" class="form-control" ng-model="name")
+       input(type="password" class="form-control" ng-model="password")
+       button(class="btn btn-default" type="submit")
+        |Login
+      |{{output}}
   include ./../footer.jade

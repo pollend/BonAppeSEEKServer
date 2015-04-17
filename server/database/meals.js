@@ -50,7 +50,7 @@ meal.prototype.setName = function(value) {
  * @param  {function} a true or false callback that verify if the commit succeeds
  */
 meal.prototype.commit = function(callback) {
-    __db.query("UPDATE meals SET name = ?, WHERE id = ?", [this._name, this._id], function(err, results) {
+    __db.query("UPDATE meals SET name = ? WHERE id = ?", [this._name, this._id], function(err, results) {
         if (err) {
             callback(false);
             console.log(err)

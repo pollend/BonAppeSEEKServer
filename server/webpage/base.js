@@ -1,10 +1,13 @@
+var defaultMenu = require("./menu/defaultMenu.js");
+
 var createWebpage = function(pages, id, app) {
     app.get(pages[id].pageId(), function(req, res) {
 
         //render the jade
         pages[id].data(function(output) {
-
             res.render(pages[id].body(), {
+                URL: __config.url,
+                menus: defaultMenu,
                 data: output
             });
         });
