@@ -7,6 +7,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/criteria.css" />
         <script src="/js/criteria.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
     </head>
     <body>
       <center> 
@@ -29,8 +30,8 @@
               </select>
           </div>
           
-          <div id=selection>
-              <select>
+          <div id="selection">
+              <select id="type">
                 <option value="null">Choose a type of meal</option>
                   <option value="fruits">fruits</option>
                   <option value="vegetables">vegetables</option>
@@ -39,15 +40,15 @@
                   <option value="dairy">dairy</option>
                   <option value="snack">snack</option>
                   <option value="dessert">dessert</option>
-              
               </select>
           </div>   
-          <div id=find>
+          <div id=find onclick="setEverything();">
               Find your food!
           </div>
         </center> 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/critera.js"></script>
+        
     </body>
 </html>
