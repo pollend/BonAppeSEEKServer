@@ -74,8 +74,8 @@ var _verify = function() {
               `name` VARCHAR(45) , \
               PRIMARY KEY (`id`), \
               UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
-                if (table.checkError(err, connection)) console.log(err);
-                connection.release();
+                if (table.checkError(err, connection))
+                    connection.release();
             });
 
         }

@@ -13,7 +13,10 @@ meal.prototype.pageId = function() {
 meal.prototype.output = function(callback, req) {
     if (req.query.hasOwnProperty("id")) {
         meals.byId(req.query.id, function(result) {
-            callback(result.toJson());
+            if (result)
+                callback(result.toJson());
+            else
+                callback(errors.id);
         });
     } else if (req.query.hasOwnProperty("search")) {
         meals.search(req.query.search, function(results) {

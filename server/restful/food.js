@@ -10,6 +10,30 @@ food.prototype.pageId = function() {
     return "food";
 };
 
+var _getFoodRequest = function(get, food, callback) {
+    if (get === "features") {
+        if (req.query.hasOwnProperty("search")) {
+            food.searchFeatures(req.query.search, function(results, error) {
+                if (!error) {
+                    callback(table.entriresToJson(results));
+                } else callback(errors.custom(error));
+            });
+        } else {
+            food.getFeatures(function(results, error) {
+                if (!error) {
+                    callback(table.entriresToJson(results));
+                } else callback(errors.custom(error));
+            });
+        }
+    } else if (get === "meals") {
+        food.getMeals(function(results, error) {
+            if (!error) {
+                callback(table.entriresToJson(results));
+            } else callback(errors.custom(error));
+        });
+    } else callback(errors.get);
+};
+
 food.prototype.output = function(callback, req) {
 
     if (req.query.hasOwnProperty("id")) {
@@ -18,27 +42,7 @@ food.prototype.output = function(callback, req) {
             if (!error) {
                 //checks for the get property
                 if (req.query.hasOwnProperty("get")) {
-                    if (req.query.get === "features") {
-                        if (req.query.hasOwnProperty("search")) {
-                            result.searchFeatures(req.query.search, function(results, error) {
-                                if (!error) {
-                                    callback(table.entriresToJson(results));
-                                } else callback(errors.custom(error));
-                            });
-                        } else {
-                            result.getFeatures(function(results) {
-                                if (results) {
-                                    callback(table.entriresToJson(results));
-                                } else callback(errors.empty);
-                            });
-                        }
-                    } else if (req.query.get === "meals") {
-                        result.getMeals(function(results, error) {
-                            if (!error) {
-                                callback(table.entriresToJson(results));
-                            } else callback(errors.custom(error));
-                        });
-                    } else callback(errors.get);
+                    _getFoodRequest(req.query.get, result, callback);
                     //returns the id result
                 } else {
                     if (!result)

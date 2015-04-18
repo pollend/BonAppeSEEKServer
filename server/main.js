@@ -6,11 +6,9 @@ var app = express();
 var jade = require('jade');
 app.set('view engine', 'jade');
 
-
 //linking bower components and public folder
 app.use('/b_public', express.static("bower_components"));
 app.use('/public', express.static("public"));
-
 
 //globals------------------------------------------------------------------
 global.__config = require("./config.js");
@@ -29,6 +27,7 @@ require("./webpage/base.js")(app);
 //used for rest interface
 require("./restful/base.js")(app);
 
+
 //creates the server-------------------------------------------------------
 var server = app.listen(3000, function() {
 
@@ -37,4 +36,8 @@ var server = app.listen(3000, function() {
 
     console.log('Created Server at http://%s:%s', host, port);
 
+});
+
+app.get("/*", function(req, res) {
+    res.sendFile(__base + "/public/html/index.html");
 });
