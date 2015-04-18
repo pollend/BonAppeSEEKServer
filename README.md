@@ -56,6 +56,3 @@ http://jade-lang.com/reference/case/
 Mysql
 
 https://www.npmjs.com/package/mysql
-
-
----- Devin testing committing -------
