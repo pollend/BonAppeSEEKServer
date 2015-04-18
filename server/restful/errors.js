@@ -1,4 +1,13 @@
+var _custom = function(err) {
+    return {
+        id: -1,
+        "error": err
+    }
+
+}
+
 module.exports = {
+    "custom": _custom,
     "id": {
         id: 0,
         "error": "illegal Id"

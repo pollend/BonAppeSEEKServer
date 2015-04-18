@@ -12,18 +12,14 @@ feature.prototype.pageId = function() {
 
 feature.prototype.output = function(callback, req) {
     if (req.query.hasOwnProperty("id")) {
-        features.byId(req.query.id, function(result) {
-            if (result) {
-                callback(result.toJson());
-            } else callback(errors.empty);
+        features.byId(req.query.id, function(result, err) {
+            callback(result.toJson());
         });
     } else if (req.query.hasOwnProperty("search")) {
         features.search(req.query.search, function(result) {
-            if (result) {
-                callback(table.entriresToJson(result));
-            } else callback(errors.empty);
+            callback(table.entriresToJson(result));
         });
-    } else callback(errors.general);
+    }
 };
 
 module.exports = feature;

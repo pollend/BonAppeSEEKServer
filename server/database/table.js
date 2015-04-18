@@ -6,6 +6,19 @@ var _entriesToJson = function(entries) {
     return ljson;
 }
 
+var _checkError = function(err, connection, callback) {
+    if (err) {
+        connection.release();
+        console.log(err);
+        if (callback && typeof callback == "function") {
+            callback(null, err);
+        }
+        return false;
+    }
+    return true;
+}
+
 module.exports = {
-    entriresToJson: _entriesToJson
+    entriresToJson: _entriesToJson,
+    checkError: _checkError
 }

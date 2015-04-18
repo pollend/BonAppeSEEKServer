@@ -1,6 +1,8 @@
 var relationFoodFeature = require("./relationFoodsFeatures.js");
 var relationFoodsMeals = require("./relationFoodsMeals.js");
 var feature = require("./features.js");
+var table = require("./table.js");
+
 
 var food = function(result) {
     this._id = result.id;
@@ -30,8 +32,8 @@ food.prototype.getMeals = function(callback) {
     relationFoodsMeals.getMeals(this, callback);
 };
 
-food.prototype.searchMeals = function(serach,callback) {
-    relationFoodsMeals.searchMeals(this,search,callback);
+food.prototype.searchMeals = function(serach, callback) {
+    relationFoodsMeals.searchMeals(this, search, callback);
 };
 
 
@@ -81,76 +83,97 @@ food.prototype.getNutritionImage = function() {
 
 
 food.prototype.commit = function(callback) {
-    __db.query("UPDATE foods SET name = ?, image = ?, nutritionImage = ? WHERE id = ?", [this._name, this._image, this._nutritionImage, this._id], function(err, results) {
-        if (err) {
-            callback(false);
-            console.log(err)
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("UPDATE foods SET name = ?, image = ?, nutritionImage = ? WHERE id = ?", [this._name, this._image, this._nutritionImage, this._id], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    callback(true);
+                    connection.release();
+                }
+            });
         }
 
-        callback(true);
     });
 };
 
 
 var _foodById = function(id, callback) {
-    var query = __db.query("SELECT * FROM foods WHERE id = ?", [id], function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
+
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM foods WHERE id = ?", [id], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lfoods = null;
+                    for (var x = 0; x < results.length; x++) {
+                        lfoods = new food(results[x]);
+                    }
+                    callback(lfoods);
+                    connection.release();
+                }
+
+            });
         }
 
-        var lfeatures = null;
-        console.log(results);
-        for (var x = 0; x < results.length; x++) {
-            lfeatures = new food(results[x]);
-        }
-        callback(lfeatures);
     });
 }
 
 var _create = function(name, image, nutritionImage, callback) {
-    var lfoodItem = {
-        "name": name,
-        "image": image,
-        "nutritionImage": nutritionImage
-    };
-    var query = __db.query("INSERT INTO foods SET ?", lfoodItem, function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
+
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("INSERT INTO foods SET ?", lfoodItem, function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lfoodItem = {
+                        "name": name,
+                        "image": image,
+                        "nutritionImage": nutritionImage
+                    };
+                    callback(new food({
+                        id: results.insertId,
+                        foodItem: name
+                    }));
+                    connection.release();
+                }
+            });
         }
 
-        callback(new food({
-            id: results.insertId,
-            foodItem: name
-        }))
     });
 };
 
 var _search = function(name, callback) {
 
-    var query = __db.query("SELECT * FROM foods WHERE name LIKE ?", [name], function(err, results) {
-        if (err) {
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM foods WHERE name LIKE ?", [name], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lfoods = [];
+                    for (var x = 0; x < results.length; x++) {
+                        lfoods.push(new food(results[x]));
+                    }
+                    callback(lfoods);
+                    connection.release();
+                }
+            });
+        }
 
-            console.log(err);
-        }
-        console.log(results);
-        var lfoods = [];
-        for (var x = 0; x < results.length; x++) {
-            lfoods.push(new food(results[x]));
-        }
-        callback(lfoods);
     });
 };
 
 var _verify = function() {
-    __db.query("CREATE TABLE IF NOT EXISTS  `foods` ( \
-  `id` INT AUTO_INCREMENT, \
-  `name` VARCHAR(45) , \
-  `image` VARCHAR(200) , \
-  `nutritionImage` VARCHAR(200) , \
-  PRIMARY KEY (`id`), \
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC));");
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection)) {
+            __db.query("CREATE TABLE IF NOT EXISTS  `foods` ( \
+                      `id` INT AUTO_INCREMENT, \
+                      `name` VARCHAR(45) , \
+                      `image` VARCHAR(200) , \
+                      `nutritionImage` VARCHAR(200) , \
+                      PRIMARY KEY (`id`), \
+                      UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
+                if (table.checkError(err, connection))
+                    connection.release();
+            });
+        }
+    });
 }
 
 module.exports = {

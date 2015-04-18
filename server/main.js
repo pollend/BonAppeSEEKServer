@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 
+
 //used for the jade template engine
 var jade = require('jade');
 app.set('view engine', 'jade');

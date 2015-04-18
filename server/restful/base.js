@@ -2,11 +2,19 @@ var _createRest = function(interfaces, id, app) {
 
     app.get("/rest/" + interfaces[id].pageId(), function(req, res) {
         console.log(req.query);
+
         interfaces[id].output(function(json) {
-            res.send({
-                data: json
-            });
+            try {
+                res.send({
+                    data: json
+                });
+            } catch (err) {
+                res.send({
+                    error: json
+                });
+            }
         }, req);
+
     });
 }
 

@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var phoneTokens = require('phoneTokens.js');
+var table = require("./table.js");
 
 var account = function(result) {
     this._name = result.name;
@@ -36,21 +37,15 @@ account.prototype.updatePassword = function(value) {
 account.prototype.commit = function(callback) {
 
     __db.getConnection(function(err, connection) {
-        if (err) {
-            callback(false);
-            console.log(err);
-            connection.release()
-        } else {
+        if (table.checkError(err, connection)) {
             connection.query("UPDATE accounts SET name = ?, password = ? WHERE id = ?", [this._name, this._password, this._id], function(err, results) {
-                if (err) {
-                    callback(false);
-                    console.log(err)
-                } else {
+                if (table.checkError(err, connection)) {
                     callback(true);
+                    connection.release();
                 }
-                connection.release();
             });
         }
+
     });
 
 };
@@ -58,23 +53,16 @@ account.prototype.commit = function(callback) {
 
 var _login = function(name, password, callback) {
     __db.getConnection(function(err, connection) {
-        if (err) {
-            callback(false);
-            console.log(err);
-            connection.release()
-        } else {
+        if (table.checkError(err, connection)) {
             connection.query("SELECT * FROM accounts WHERE name = ? AND password = ?", [name, _hashPassword(password)], function(err, results) {
-                if (err) {
-                    callback(false);
-                    console.log(err);
-                } else {
+                if (table.checkError(err, connection)) {
                     if (results.length > 0) {
                         callback(new account(results[0]));
                     } else {
-                        callback(false);
+                        callback(null);
                     }
+                    connection.release();
                 }
-                connection.release();
             });
         }
     });
@@ -83,27 +71,20 @@ var _login = function(name, password, callback) {
 
 var _search = function(name, callback) {
     __db.getConnection(function(err, connection) {
-        if (err) {
-            callback(null);
-            console.log(err);
-            connection.release();
+        if (table.checkError(err, connection)) {
 
-        } else {
             connection.query("SELECT * FROM accounts WHERE name = ?", [name], function(err, results) {
-                if (err) {
-                    callback(null);
-                    console.log(err);
-                } else {
+                if (table.checkError(err, connection)) {
                     var laccount = null;
                     for (var i = results.length - 1; i >= 0; i--) {
                         laccount = new account(results[i]);
                     }
                     callback(laccount);
+                    connection.release();
                 }
-                connection.release();
-
             });
         }
+
     });
 
 };
@@ -111,29 +92,23 @@ var _search = function(name, callback) {
 var _create = function(name, password, callback) {
 
     __db.getConnection(function(err, connection) {
-        if (err) {
-            callback(null);
-            console.log(err);
-            connection.release();
+            if (table.checkError(err, connection, callback)) {
+                var laccount = {
+                    "name": name,
+                    "password": _hashPassword(password)
+                };
+                connection.query("INSERT INTO accounts SET ?", laccount, function(err, result) {
+                    if (table.checkError(err, connection)) {
+                        callback(new account({
+                            "id": result.insertId,
+                            "name": name,
+                            "password": password
+                        }));
 
-        } else {
-            var laccount = {
-                "name": name,
-                "password": _hashPassword(password)
+                        connection.release();
+                    }
+                })
             };
-            __db.query("INSERT INTO accounts SET ?", laccount, function(err, result) {
-                if (err) {
-                    callback(null);
-                    console.log(err);
-                } else {
-                    callback(new account({
-                        "id": result.insertId,
-                        "name": name,
-                        "password": password
-                    }));
-                }
-                connection.release();
-            });
         }
     });
 
@@ -141,37 +116,38 @@ var _create = function(name, password, callback) {
 
 var _accountById = function(id, callback) {
     __db.getConnection(function(err, connection) {
-        if (err) {
-            callback(null);
-            console.log(err);
-            connection.release();
-
-        } else {
+        if (table.checkError(err, connection, callback)) {
             connection.query("SELECT * FROM accounts WHERE id = ?", [id], function(err, results) {
-                if (err) {
-                    callback(null);
-                    console.log(err);
-                } else {
-
+                if (table.checkError(err, connection, callback)) {
                     var laccount = null;
                     for (var i = results.length - 1; i >= 0; i--) {
                         laccount = new account(results[i]);
                     }
                     callback(laccount);
+                    connection.release();
                 }
             });
         }
+
     });
 }
 
 var _verify = function() {
-    __db.query("CREATE TABLE IF NOT EXISTS  `accounts` ( \
-  `id` INT AUTO_INCREMENT, \
-  `name` VARCHAR(45) , \
-  `password` VARCHAR(200) , \
-  `email` VARCHAR(200) , \
-  PRIMARY KEY (`id`), \
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC));");
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection)) {
+            connection.query("CREATE TABLE IF NOT EXISTS  `accounts` ( \
+                              `id` INT AUTO_INCREMENT, \
+                              `name` VARCHAR(45) , \
+                              `password` VARCHAR(200) , \
+                              `email` VARCHAR(200) , \
+                              PRIMARY KEY (`id`), \
+                              UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
+                if (table.checkError(err, connection)) {
+                    connection.release();
+                }
+            });
+        }
+    });
 };
 
 module.exports = {

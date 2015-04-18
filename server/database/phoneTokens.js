@@ -1,5 +1,6 @@
 var crypto = require('crypto');
 var accounts = require("accounts.js");
+var table = require("./table.js");
 
 var phoneToken = function(result) {
     this._accountId = result.accountId;
@@ -16,54 +17,68 @@ var _generateToken = function() {
 };
 
 var _getTokensById = function(accountId, callback) {
-    __db.query("SELECT * FROM phoneTokens WHERE accountId = ?", [accountId], function(err, results) {
-        if (err) {
-            console.log(err);
-            callback(null);
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM phoneTokens WHERE accountId = ?", [accountId], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var ltokens = [];
+                    for (var x = 0; x < results.length; x++) {
+                        ltokens.push(new phoneToken(results[x]));
+                    }
+                    callback(ltokens);
+                    connection.release();
+                }
+            });
         }
-        var ltokens = [];
-        for (var x = 0; x < results.length; x++) {
-            ltokens.push(new phoneToken(results[x]));
-        }
-        callback(ltokens);
     });
 };
 
 var _getAccountByToken = function(token, callback) {
-    __db.query("SELECT phoneTokens.*, accounts.* FROM phoneTokens INNER JOIN accounts ON phoneTokens.accountId = accounts.id WHERE phoneTokens.token = ?", [token], function(err, results) {
-        if (err) {
-            console.log(err);
-            callback(null);
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection)) {
+            connection.query("SELECT phoneTokens.*, accounts.* FROM phoneTokens INNER JOIN accounts ON phoneTokens.accountId = accounts.id WHERE phoneTokens.token = ?", [token], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var laccount = null;
+                    for (var x = 0; x < results.length; x++) {
+                        laccount = new accounts._account(results[x]);
+                    }
+                    callback(laccount);
+                    connection.release();
+                }
+            });
         }
-        var laccount = null;
-        for (var x = 0; x < results.length; x++) {
-            laccount = new accounts._account(results[x]);
-        }
-        callback(laccount);
     });
 };
 
 var _create = function(account) {
     var ltoken = {
-        "accountId": account,
+        "accountId": account.getId(),
         "token": _generateToken()
     };
-
-    __db.query("INSERT INTO phoneTokens SET ?", laccount, function(err, result) {
-        if (err) {
-            callback(null);
-            console.log(err);
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("INSERT INTO phoneTokens SET ?", ltoken, function(err, result) {
+                if (table.checkError(err, connection, callback)) {
+                    callback(new accounts._account(ltoken));
+                    connection.release();
+                }
+            });
         }
-        callback(new account(ltoken));
-
     });
 
 };
 
 var _verify = function() {
-    __db.query("CREATE TABLE IF NOT EXISTS  `phoneTokens` ( \
-  `accountId` INT , \
-  `token` VARCHAR(45));");
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection)) {
+            connection.query("CREATE TABLE IF NOT EXISTS  `phoneTokens` ( \
+          `accountId` INT , \
+          `token` VARCHAR(45));", function(err, results) {
+                if (table.checkError(err, connection))
+                    connection.release();
+            });
+        }
+    });
 };
 
 module.exports = {

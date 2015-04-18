@@ -1,4 +1,5 @@
 var relationFoodsMeals = require("./relationFoodsMeals.js");
+var table = require("./table.js");
 
 var meal = function(result) {
     this._id = result.id;
@@ -50,13 +51,15 @@ meal.prototype.setName = function(value) {
  * @param  {function} a true or false callback that verify if the commit succeeds
  */
 meal.prototype.commit = function(callback) {
-    __db.query("UPDATE meals SET name = ? WHERE id = ?", [this._name, this._id], function(err, results) {
-        if (err) {
-            callback(false);
-            console.log(err)
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("UPDATE meals SET name = ? WHERE id = ?", [this._name, this._id], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    callback(true);
+                    connection.release();
+                }
+            });
         }
-
-        callback(true);
     });
 };
 
@@ -64,11 +67,19 @@ meal.prototype.commit = function(callback) {
  * verifies the table
  */
 var _verify = function() {
-    __db.query("CREATE TABLE IF NOT EXISTS  `meals` ( \
-  `id` INT AUTO_INCREMENT, \
-  `name` VARCHAR(45) , \
-  PRIMARY KEY (`id`), \
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC));");
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection)) {
+            connection.query("CREATE TABLE IF NOT EXISTS  `meals` ( \
+              `id` INT AUTO_INCREMENT, \
+              `name` VARCHAR(45) , \
+              PRIMARY KEY (`id`), \
+              UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
+                if (table.checkError(err, connection)) console.log(err);
+                connection.release();
+            });
+
+        }
+    });
 }
 
 /**
@@ -77,16 +88,20 @@ var _verify = function() {
  * @param  {Function} callback the callback of meals
  */
 var _search = function(name, callback) {
-    var query = __db.query("SELECT * FROM meals WHERE name LIKE ?", [name], function(err, results) {
-        if (err) {
-            console.log(err)
-            callback(null);
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM meals WHERE name LIKE ?", [name], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lmeals = [];
+                    for (var i = 0; i < results.length; i++) {
+                        lmeals.push(new meal(results[i]));
+                    };
+                    callback(lmeals);
+                    connection.release();
+                }
+
+            });
         }
-        var lmeals = [];
-        for (var i = 0; i < results.length; i++) {
-            lmeals.push(new meal(results[i]));
-        };
-        callback(lmeals);
 
     });
 }
@@ -97,34 +112,40 @@ var _search = function(name, callback) {
  * @param  {Function} callback The collection of meals
  */
 var _mealById = function(id, callback) {
-    var query = __db.query("SELECT * FROM meals WHERE id = ?", [id], function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
-        }
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM meals WHERE id = ?", [id], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lmeals = null;
+                    console.log(results);
+                    for (var x = 0; x < results.length; x++) {
+                        lmeals = new meal(results[x]);
+                    }
+                    callback(lmeals);
+                }
+            });
 
-        var lmeals = null;
-        console.log(results);
-        for (var x = 0; x < results.length; x++) {
-            lmeals = new meal(results[x]);
         }
-        callback(lmeals);
     });
 }
 
+
 var _create = function(name, callback) {
-    var lmeal = {
-        "name": name
-    };
-    var query = __db.query("INSERT INTO meals SET ?", lmeal, function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
-        } else {
-            callback(new meal({
-                "id": results.insertId,
-                "name": name
-            }))
+
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("INSERT INTO meals SET ?", lmeal, function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lmeal = {
+                        "name": name
+                    };
+                    callback(new meal({
+                        "id": results.insertId,
+                        "name": name
+                    }));
+                }
+
+            });
         }
     });
 }

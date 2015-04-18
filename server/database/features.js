@@ -1,4 +1,5 @@
 var relationFoodItemFeature = require("./relationFoodsFeatures.js");
+var table = require("./table.js");
 
 var feature = function(result) {
     this._id = result.id;
@@ -41,72 +42,91 @@ feature.prototype.getId = function() {
 
 //commit the data to the features
 feature.prototype.commit = function(callback) {
-    __db.query("UPDATE features SET name = ? WHERE id = ?", [this._name, this._id], function(err, results) {
-        if (err) {
-            callback(false);
-            console.log(err)
-        }
-
-        callback(true);
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("UPDATE features SET name = ? WHERE id = ?", [this._name, this._id], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    callback(true);
+                    connection.release();
+                }
+            });
+        };
     });
 };
 
 //get the feature by the id
 var _featureById = function(id, callback) {
-    var query = __db.query("SELECT * FROM features WHERE id = ?", [id], function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection)) {
+            connection.query("SELECT * FROM features WHERE id = ?", [id], function(err, results) {
+                if (table.checkError(err, connection)) {
+                    var lfeatures = null;
+                    for (var x = 0; x < results.length; x++) {
+                        lfeatures = new feature(results[x]);
+                    }
+                    callback(lfeatures);
+                    connection.release();
+                }
+            });
         }
 
-        var lfeatures = null;
-        for (var x = 0; x < results.length; x++) {
-            lfeatures = new feature(results[x]);
-        }
-        callback(lfeatures);
     });
 }
 
 var _create = function(name, callback) {
-    var lfeature = {
-        "name": name
-    };
-    var query = __db.query("INSERT INTO features SET ?", lfeature, function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
+
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            var lfeature = {
+                "name": name
+            };
+            connection.query("INSERT INTO features SET ?", lfeature, function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    callback(new feature({
+                        "id": results.insertId,
+                        "name": name
+                    }));
+                    connection.release();
+                }
+            });
         }
 
-        callback(new feature({
-            "id": results.insertId,
-            "name": name
-        }));
     });
 }
 
 
 var _searchByName = function(name, callback) {
 
-    var query = __db.query("SELECT * FROM features WHERE name LIKE ?", [name], function(err, results) {
-        if (err) {
-            callback(null);
-            console.log(err)
+    __db.getConnection(function(err, connection) {
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM features WHERE name LIKE ?", [name], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    var lfeatures = [];
+                    for (var x = 0; x < results.length; x++) {
+                        lfeatures.push(new feature(results[x].id, results[x].feature));
+                    }
+
+                    callback(lfeatures);
+                    connection.release();
+                }
+            });
         }
 
-        var lfeatures = [];
-        for (var x = 0; x < results.length; x++) {
-            lfeatures.push(new feature(results[x].id, results[x].feature));
-        }
-        callback(lfeatures);
     });
 }
 
 var _verify = function() {
-    __db.query("CREATE TABLE IF NOT EXISTS  `features` ( \
+    __db.getConnection(function(err, connection) {
+        connection.query("CREATE TABLE IF NOT EXISTS  `features` ( \
   `id` INT AUTO_INCREMENT, \
   `name` VARCHAR(45) , \
   PRIMARY KEY (`id`), \
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC));");
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
+            if (table.checkError(err, connection)) {
+                connection.release();
+            }
+        });
+    });
 }
 
 module.exports = {
