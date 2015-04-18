@@ -5,29 +5,21 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="css/nutrition.css" />
         <script src="/js/criteria.js"></script>
     </head>
-    <body>
+    <body onload="populateTable();">
       <center> 
           <img src="img/home.png" style="padding-left:5px;float:left;height:35px;width:35px"/><br><br>
-          <div id=help>
-              Food
-          </div>
+          <div id=help> </div>
           <br><br>
-          <table id=food>
-              <tr>
-              
-              <td>hidfgdfsgsdfgsdfsfd</td></tr>
-              <tr><td>dsfgdfgdfgsdfd</td></tr>
-         
-              <!-- use to populate table
-        http://www.w3schools.com/jsref/met_table_insertrow.asp 
-          
-          -->
-          </table>
+          <table id=food></table>
         </center> 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
+        <script type="text/javascript" src="js/list.js"></script>
     </body>
 </html>

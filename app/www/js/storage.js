@@ -29,10 +29,12 @@ function setEverything() {
     var feature =  document.getElementById("second").value;
     var type = document.getElementById("type").value;
     var first = document.getElementById("first").value;
-
+    
     localStorage.setItem("feature", feature);
     localStorage.setItem("type", type); 
     localStorage.setItem("first", first);
+    
+    window.location.href = "foodlist.html";
 }
 
 function resetEverything() {

@@ -42,7 +42,7 @@ body {
 }
 
 #food {
-    width:90%;
+    width:80%;
     font-family: cicle_gordita;
     font-size: 15px;
     border: 3px solid black;
@@ -52,13 +52,13 @@ body {
 
 tr:nth-child(even) {
     background: #CCC;
-    width:90%;
+    width:80%;
     height:30px;
 
 }
 tr:nth-child(odd) {
     background: #FFF;
-    width:90%;
+    width:80%;
     height: 30px;
 }
 
