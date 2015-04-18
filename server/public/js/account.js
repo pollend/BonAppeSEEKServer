@@ -1,4 +1,4 @@
-app.controller('home', ['$scope', '$window',
+app.controller('login', ['$scope', '$window',
     function($scope, $window) {
         $scope.login = function() {
             $window.location.href;
@@ -7,9 +7,12 @@ app.controller('home', ['$scope', '$window',
             var x = $window;
 
         }
-
-        $scope.register = function() {
-
-        }
     }
 ]);
+
+
+var register = function() {
+
+};
+
+app.controller('register', register);

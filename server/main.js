@@ -22,7 +22,7 @@ global.__base = __dirname + '/';
 require("./database/database.js")();
 
 //sets up the basic web pages displayed
-require("./webpage/base.js")(app);
+//require("./webpage/base.js")(app);
 
 //used for rest interface
 require("./restful/base.js")(app);
