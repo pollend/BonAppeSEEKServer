@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/criteria.css" />
+        <script src="/js/criteria.js"></script>
+        <script type="text/javascript" src="js/storage.js"></script>
+    </head>
+    <body>
+      <center> 
+          <div id=select>
+              Select your criteria
+          </div>
+          <div id=selection>
+            <select id ="first" name ="Choose a food characteristic" onchange="alter(this.value)">
+            <option value="null" >Select a food characteristic</option>
+            <option value="Texture">Texture</option>            
+            <option value="Taste">Taste</option>
+            <option value="Color">Color</option>
+          </select>
+          </div>
+          
+          <div id=selection>
+              <select id="second">
+                  <option value="null">Specifically</option>
+              
+              </select>
+          </div>
+          
+          <div id="selection">
+              <select id="type">
+                <option value="null">Choose a type of meal</option>
+                  <option value="Fruits">fruits</option>
+                  <option value="Vegetables">vegetables</option>
+                  <option value="Meat">meat</option>
+                  <option value="Grains">grains</option>
+                  <option value="Dairy">dairy</option>
+                  <option value="Snack">snack</option>
+                  <option value="Dessert">dessert</option>
+              </select>
+          </div>   
+          <div id=find onclick="setEverything();">
+              Find your food!
+          </div>
+        </center> 
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/critera.js"></script>
+        
+    </body>
+</html>

@@ -6,7 +6,7 @@ var table = require("./table.js");
 var _getFoods = function(feature, callback) {
     __db.getConnection(function(err, connection) {
         if (table.checkError(err, connection, callback)) {
-            connection.query("SELECT foods.* , relationFoodsFeatures.* FROM foods INNER JOIN relationFoodsFeatures ON foods.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.featureId = ?", [feature.getId()], function(err, results) {
+            connection.query("SELECT foods.*  FROM foods INNER JOIN relationFoodsFeatures ON foods.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.featureId = ?", [feature.getId()], function(err, results) {
                 if (table.checkError(err, connection, callback)) {
                     var lfoodItems = [];
                     for (var x = 0; x < results.length; x++) {
@@ -23,7 +23,7 @@ var _getFoods = function(feature, callback) {
 var _searchFoods = function(feature, search, callback) {
     __db.getConnection(function(err, connection) {
         if (table.checkError(err, connection, callback)) {
-            connection.query("SELECT foods.* , relationFoodsFeatures.* FROM foods INNER JOIN relationFoodsFeatures ON foods.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.featureId = ? AND foods.name LIKE ?", [feature.getId(), search], function(err, results) {
+            connection.query("SELECT foods.*  FROM foods INNER JOIN relationFoodsFeatures ON foods.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.featureId = ? AND foods.name LIKE ?", [feature.getId(), search], function(err, results) {
                 if (table.checkError(err, connection, callback)) {
                     var lfoodItems = [];
                     for (var x = 0; x < results.length; x++) {
@@ -41,7 +41,7 @@ var _searchFoods = function(feature, search, callback) {
 var _getFeatures = function(food, callback) {
     __db.getConnection(function(err, connection) {
         if (table.checkError(err, connection, callback)) {
-            connection.query("SELECT features.* , relationFoodsFeatures.* FROM features INNER JOIN relationFoodsFeatures ON features.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.foodId = ?", [food.getId()], function(err, results) {
+            connection.query("SELECT features.*  FROM features INNER JOIN relationFoodsFeatures ON features.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.foodId = ?", [food.getId()], function(err, results) {
                 if (table.checkError(err, connection, callback)) {
                     var lfeatures = [];
                     for (var x = 0; x < results.length; x++) {
@@ -59,7 +59,7 @@ var _getFeatures = function(food, callback) {
 var _searchFeatures = function(food, search, callback) {
     __db.getConnection(function(err, connection) {
         if (table.checkError(err, connection, callback)) {
-            connection.query("SELECT features.* , relationFoodsFeatures.* FROM features INNER JOIN relationFoodsFeatures ON features.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.foodId = ? AND features.name = ?", [food.getId(), search], function(err, results) {
+            connection.query("SELECT features.* FROM features INNER JOIN relationFoodsFeatures ON features.id = relationFoodsFeatures.foodId WHERE relationFoodsFeatures.foodId = ? AND features.name = ?", [food.getId(), search], function(err, results) {
                 if (table.checkError(err, connection, callback)) {
                     var lfeatures = [];
                     for (var x = 0; x < results.length; x++) {
