@@ -1,7 +1,7 @@
 function populateTable() {
     var typeSearch = localStorage.getItem("type");
     var featureSearch = localStorage.getItem("feature");
-    
+                localStorage.setItem("clickedFood", "testing");
     ////
     /// will need to alter data[i] depending on name in table
     ///
@@ -10,10 +10,17 @@ function populateTable() {
             url: "http://rest-service.guides.spring.io/greeting"
         }).then(function(data) {
             var toAdd = '';
-            for (var i = 0; i < data.length; i++)
+            var i;
+            for (i = 0; i < data.length; i++)
                 toAdd += "<tr><td onclick='clickedRow("+data[i]+");'>" + data[i] + "</td><td onclick='addToBoard("+data[i]+");'></td></tr>";
-            
-            toAdd += "<tr><td onclick=\"window.location.href='index.html'\"> ADDED THROUGH DYNAMIC </td><td onclick=\"window.location.href='criteria.html'\">+</td></tr>";
+               
+ 
+            toAdd += "<tr><td onclick=\"window.location.href='nutrition.html'\"> ADDED THROUGH DYNAMIC </td><td onclick=\"window.location.href='nutrition.html'\">+</td></tr>";
+            if (i < 15) {
+                for (; i < 15; i++)
+                    toAdd += "<tr><td></td><td></td></tr>";
+            }
+
             $('#food').append(toAdd);
         });
     });   

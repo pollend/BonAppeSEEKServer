@@ -67,6 +67,7 @@ select, input {
     width: 75%%;
     height: 30px;
     line-height:30px;
+    font-weight: bold;
     border: 1px solid #999;
     border-radius: 6px;
     margin-bottom:10px;
@@ -89,7 +90,8 @@ select, input {
     text-align: center;
     font-family: cicle_gordita;
     text-transform: none;
-    font-size: 17px;
+    font-size: 22px;
+    font-weight: bold;
     border-bottom: 3px outset black;
     border-right: 3px outset black;
     -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,1);

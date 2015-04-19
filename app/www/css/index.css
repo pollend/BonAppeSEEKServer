@@ -96,7 +96,7 @@ body {
     font-family: cicle_gordita;
     text-shadow: 2px 2px #009688;
     text-transform: none;
-    font-weight: normal;
+    font-weight: bold;
     color: #35A79C;
     position: center;
 }
@@ -106,7 +106,7 @@ body {
     font-family: cicle_gordita;
     text-shadow: 2px 2px #009688;
     text-transform: none;
-    font-weight: normal;
+    font-weight: bold;
     color: #35A79C;
     padding-top: 5%;
     position: center;
@@ -117,7 +117,7 @@ body {
     text-shadow: 2px 2px #009688;
     font-family: cicle_gordita;
     text-transform: none;
-    font-weight: normal;
+    font-weight: bold;
     padding-top: 5%;
     position: center;  
 }
@@ -128,7 +128,7 @@ body {
     text-shadow: 2px 2px #009688;
     font-family: cicle_gordita;
     text-transform: none;
-    font-weight: normal;
+    font-weight: bold;
     padding-top: 5%;
     position: center;  
 }
