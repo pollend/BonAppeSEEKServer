@@ -1,35 +1,43 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="application">
 	<head>
+		<base href="/">
 		<link rel="stylesheet" href="/b_public/bootstrap/dist/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="/b_public/bootstrap/dist/css/bootstrap-theme.min.css"/>
 		<link rel="stylesheet" href="/public/css/style.css"/>
 		<script src="/b_public/jquery/dist/jquery.min.js"></script>
 		<script src="/b_public/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="/b_public/angularjs/angular.min.js"></script>
+		<script type="text/javascript" src="/b_public/angular-route/angular-route.min.js"></script>
 		<script type="text/javascript" src="/public/js/main.js"></script>
+		<script type="text/javascript" src="/public/js/controller/home.js"></script>
+		<script type="text/javascript" src="/public/js/menuController.js"></script>
 		<title></title>
 	</head>
 	<body>
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" ng-controller="menu">
 			<div class="container-fluid center-block">
 				<div class="navbar-header">
 					<button type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" class="navbar-toggle collapsed"><span class="sr-only">
 						<Toggle>navigation</Toggle></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">test</a>
 					</div>
 					<div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
-					<ul class="nav navbar-nav"></ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<button type="button" class="btn btn-default navbar-btn">register</button>
-						</li>
-						<li>
-							<button type="button" class="btn btn-default navbar-btn">login</button>
-						</li>
-					</ul>
+						<ul class="nav navbar-nav">
+							<li  ng-repeat="menuItem  in menuItems">
+								<a href="{{menuItem.link}}">{{menuItem.value}}</a>
+							</li>
+						</ul>
+						<!--ul class="nav navbar-nav navbar-right">
+							<li>
+											<button type="button" class="btn btn-default navbar-btn">register</button>
+							</li>
+							<li>
+											<button type="button" class="btn btn-default navbar-btn">login</button>
+							</li>
+					</ul-->
 				</div>
 			</div>
 		</nav>
-		<div ng-view></div ng-view>
+		<div ng-view></div>
 	</body>
 </html>

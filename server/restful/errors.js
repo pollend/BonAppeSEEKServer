@@ -23,5 +23,10 @@ module.exports = {
     "empty": {
         id: 3,
         "error": "no entries found"
+    },
+    "usernameUsed": {
+        id: 4,
+        "error": "username already used"
     }
+
 };

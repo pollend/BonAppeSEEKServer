@@ -118,10 +118,10 @@ var _searchByName = function(name, callback) {
 var _verify = function() {
     __db.getConnection(function(err, connection) {
         connection.query("CREATE TABLE IF NOT EXISTS  `features` ( \
-  `id` INT AUTO_INCREMENT, \
-  `name` VARCHAR(45) , \
-  PRIMARY KEY (`id`), \
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
+                          `id` INT AUTO_INCREMENT, \
+                          `name` VARCHAR(45) , \
+                          PRIMARY KEY (`id`), \
+                          UNIQUE INDEX `id_UNIQUE` (`id` ASC));", function(err, results) {
             if (table.checkError(err, connection)) {
                 connection.release();
             }

@@ -1,4 +1,6 @@
 var express = require('express');
+var session = require('express-session');
+
 var app = express();
 
 
@@ -14,6 +16,17 @@ app.use('/public', express.static("public"));
 global.__config = require("./config.js");
 
 global.__base = __dirname + '/';
+
+
+app.use(session({
+    secret: __config.token_salt,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 100000
+    }
+}));
+
 
 
 //initialize --------------------------------------------------------------

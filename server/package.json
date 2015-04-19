@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.12.3",
+    "express-session": "^1.11.1",
     "jade": "^1.9.2",
     "mysql": "^2.6.1"
   }

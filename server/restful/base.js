@@ -1,6 +1,7 @@
 var _createRest = function(interfaces, id, app) {
 
-    app.get("/rest/" + interfaces[id].pageId(), function(req, res) {
+    app.post("/rest/" + interfaces[id].pageId(), function(req, res) {
+        req.session.test = "asdf";
         console.log(req.query);
 
         interfaces[id].output(function(json) {
@@ -32,6 +33,9 @@ var base = function(app) {
 
     var feature = require("./feature.js");
     interfaces.push(new feature());
+
+    var account = require("./account.js");
+    interfaces.push(new account());
 
     for (var i = 0; i < interfaces.length; i++) {
         _createRest(interfaces, i, app);

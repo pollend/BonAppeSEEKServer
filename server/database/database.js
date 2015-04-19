@@ -15,6 +15,7 @@ var database = function() {
     require("./meals.js").verify();
     require("./relationFoodsFeatures.js").verify();
     require("./relationFoodsMeals.js").verify();
+    require("./accounts.js").verify();
 
 }
 

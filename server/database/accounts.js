@@ -1,6 +1,7 @@
 var crypto = require('crypto');
-var phoneTokens = require('phoneTokens.js');
+//var phoneTokens = require('phoneTokens.js');
 var table = require("./table.js");
+var errors = require("./../restful/errors.js");
 
 var account = function(result) {
     this._name = result.name;
@@ -12,10 +13,10 @@ var _hashPassword = function(password) {
     return crypto.createHash('sha256').update(__config.password_salt + password).digest('base64');
 }
 
-account.prototype.getPhoneTokens = function(callback) {
+/*account.prototype.getPhoneTokens = function(callback) {
     phoneTokens.getAccountsByToken(this, callback);
 
-};
+};*/
 
 
 account.prototype.getName = function() {
@@ -92,23 +93,30 @@ var _search = function(name, callback) {
 var _create = function(name, password, callback) {
 
     __db.getConnection(function(err, connection) {
-            if (table.checkError(err, connection, callback)) {
-                var laccount = {
-                    "name": name,
-                    "password": _hashPassword(password)
-                };
-                connection.query("INSERT INTO accounts SET ?", laccount, function(err, result) {
-                    if (table.checkError(err, connection)) {
-                        callback(new account({
-                            "id": result.insertId,
+        if (table.checkError(err, connection, callback)) {
+            connection.query("SELECT * FROM accounts WHERE name = ?", [name], function(err, results) {
+                if (table.checkError(err, connection, callback)) {
+                    if (results.length == 0) {
+                        var laccount = {
                             "name": name,
-                            "password": password
-                        }));
+                            "password": _hashPassword(password)
+                        };
+                        connection.query("INSERT INTO accounts SET ?", laccount, function(err, result) {
+                            if (table.checkError(err, connection)) {
+                                callback(new account({
+                                    "id": result.insertId,
+                                    "name": name,
+                                    "password": password
+                                }));
 
-                        connection.release();
+                                connection.release();
+                            }
+                        });
+                    } else {
+                        callback(null, errors.usernameUsed);
                     }
-                })
-            };
+                }
+            });
         }
     });
 

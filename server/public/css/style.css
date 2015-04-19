@@ -71,6 +71,11 @@ html, body {
 background-color: #526376;
 
 }
+
+.formPanel{
+	padding: 15px;
+}
+
 @media screen and (min-width:768px) {
 	.center-block{
 		width:100%;
