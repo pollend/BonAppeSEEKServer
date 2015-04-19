@@ -1,75 +1,75 @@
 function updateTexture(menu) {
     var option = document.createElement("option");
-    option.text = "dry";
-    option.value = "dry";
+    option.text = "Dry";
+    option.value = "Dry";
     menu.appendChild(option);
 
     var option2 = document.createElement("option");
-    option2.text = "liquid";
-    option2.value = "liquid";
+    option2.text = "Liquid";
+    option2.value = "Liquid";
     menu.appendChild(option2);
 
     var option3 = document.createElement("option");
-    option3.text = "chewy";
-    option3.value = "chewy";
+    option3.text = "Chewy";
+    option3.value = "Chewy";
     menu.appendChild(option3);
 
     var option4 = document.createElement("option");
-    option4.text = "crunchy";
-    option4.value = "crunchy";
+    option4.text = "Crunchy";
+    option4.value = "Crunchy";
     menu.appendChild(option4);
 
     var option5 = document.createElement("option");
     option5.text = "Mushy/Soft";
-    option5.value = "soft";
+    option5.value = "Soft";
     menu.appendChild(option5);
 }
 function updateTaste(menu) {
     var option = document.createElement("option");
-    option.text = "sweet";
-    option.value = "sweet";
+    option.text = "Sweet";
+    option.value = "Sweet";
     menu.appendChild(option);
 
     var option2 = document.createElement("option");
-    option2.text = "sour";
-    option2.value = "sour";
+    option2.text = "Sour";
+    option2.value = "Sour";
     menu.appendChild(option2);
 
     var option3 = document.createElement("option");
-    option3.text = "salty";
-    option3.value = "salty";
+    option3.text = "Salty";
+    option3.value = "Salty";
     menu.appendChild(option3);
 
     var option4 = document.createElement("option");
-    option4.text = "bitter";
-    option4.value = "bitter";
+    option4.text = "Bitter";
+    option4.value = "Bitter";
     menu.appendChild(option4);
 }
 
 function updateColor(menu) {
     var option = document.createElement("option");
-    option.text = "red";
-    option.value = "red";
+    option.text = "Red";
+    option.value = "Red";
     menu.appendChild(option);
 
     var option2 = document.createElement("option");
-    option2.text = "orange";
-    option2.value = "orange";
+    option2.text = "Orange";
+    option2.value = "Orange";
     menu.appendChild(option2);
 
     var option3 = document.createElement("option");
-    option3.text = "yellow";
-    option3.value = "yellow";
+    option3.text = "Yellow";
+    option3.value = "Yellow";
     menu.appendChild(option3);
 
     var option4 = document.createElement("option");
-    option4.text = "green";
-    option4.value = "green";
+    option4.text = "Green";
+    option4.value = "Green";
     menu.appendChild(option4);
 
     var option5 = document.createElement("option");
-    option5.text = "white";
-    option5.value = "white";
+    option5.text = "White";
+    option5.value = "White";
     menu.appendChild(option5);
 
 }
@@ -81,15 +81,15 @@ function alter(val) {
     begin.value = "null";
     menu.appendChild(begin);
 
-    if (val === "texture") {
+    if (val === "Texture") {
         updateTexture(menu);
     }
 
-    else if (val === "taste") {
+    else if (val === "Taste") {
         updateTaste(menu);
     }
 
-    else if (val === "color") {
+    else if (val === "Color") {
         updateColor(menu);
     }
     else {

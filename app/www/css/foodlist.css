@@ -3,7 +3,7 @@
 }
 
 body {
-    overflow:hidden;
+   overflow: hidden;
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
@@ -41,24 +41,29 @@ body {
     src: url(../img/theboldfont.ttf);
 }
 
+#fooddiv {
+    overflow: scroll;
+    height: 320px;
+    border: 3px solid black;
+    width: 80%;
+}
 #food {
-    width:90%;
+    width: 100%;
     font-family: cicle_gordita;
     font-size: 15px;
-    border: 3px solid black;
     background-color:white;
     
 }
 
 tr:nth-child(even) {
     background: #CCC;
-    width:90%;
+    width: 100%;
     height:30px;
 
 }
 tr:nth-child(odd) {
     background: #FFF;
-    width:90%;
+    width: 100%;
     height: 30px;
 }
 
