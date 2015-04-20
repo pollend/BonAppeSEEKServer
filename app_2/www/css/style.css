@@ -1,12 +1,37 @@
 /* Empty. Add your own CSS if you like */
+.autism-app-largeicon{
+	font-size: 30px;
+	padding: 0px 2px;
+}
+
+.pane{
+	 background: url("../img/App Images/Wooden background.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.button-gordita{
+	font-family: cicle_gordita;
+    color: #0096BB !important;
+    src: url(../img/Fonts/Cicle_Gordita.ttf);
+    font-size: 50px;
+    text-shadow: -1px 1px #009AEA;
+}
 
 .header-image{
 	width: 100%;
-
+	max-width: 700px;
+	margin: 0px auto;
 	position:  relative;
 }
 .header-image img{
 	width: 100%;
 	height: auto;
 	
+}
+
+.header-title{
+	text-align: center;
 }

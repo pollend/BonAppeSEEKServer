@@ -1,52 +1,57 @@
-<div id="select">
-  Select your criteria
+<div  align-title="left" class="bar bar-header bar-light">
+ <a href="#/pecboard" class="button button-clear"><i class="ion-calendar"></i></a>
+</div >
+
+<div class="content has-header padding">
+  <h3 class="header-title">
+    Select your criteria
+  </h3>
+
+  <div class="list">
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Select a food characteristic
+      </div>
+      <select ng-model="characteristic" ng-change="updateSpecification()">
+        <option value="Texture">Texture</option>
+        <option value="Taste">Taste</option>
+        <option value="Color">Color</option>
+      </select>
+    </label>
+  </div>
+
+
+  <div class="list" ng-show="specifications.length > 0">
+    <label class="item item-input item-select">
+      <div class="input-label">
+       Specifically
+      </div>
+      <select ng-model="specifically">
+         <option ng-repeat="specfic in specifications"  value="{{specfic.id}}"> {{specfic.value}}</option>
+      </select>
+    </label>
+  </div>
+
+
+  <div class="list">
+    <label class="item item-input item-select">
+      <div class="input-label">
+       Meal
+      </div>
+      <select ng-model="meal">
+        <option></option>
+        <option value="1">fruits</option>
+        <option value="2">vegetables</option>
+        <option value="3">meat</option>
+        <option value="4">grains</option>
+        <option value="5">dairy</option>
+        <option value="6">snack</option>
+        <option value="7">dessert</option>
+      </select>
+    </label>
+  </div>
+
+  <button class="button button-block button-clear" ng-click="submit()">
+    Find your food!
+  </button>
 </div>
-
-<div class="list">
-  <label class="item item-input item-select">
-    <div class="input-label">
-      Select a food characteristic
-    </div>
-    <select ng-model="characteristic" ng-change="updateSpecification()">
-      <option value="Texture">Texture</option>
-      <option value="Taste">Taste</option>
-      <option value="Color">Color</option>
-    </select>
-  </label>
-</div>
-
-
-<div class="list" ng-show="specifications.length > 0">
-  <label class="item item-input item-select">
-    <div class="input-label">
-     Specifically
-    </div>
-    <select ng-model="specifically">
-       <option ng-repeat="specfic in specifications"  value="{{specfic}}"> {{specfic}}</option>
-    </select>
-  </label>
-</div>
-
-
-<div class="list">
-  <label class="item item-input item-select">
-    <div class="input-label">
-     Meal
-    </div>
-    <select ng-model="meal">
-      <option></option>
-      <option value="Fruits">fruits</option>
-      <option value="Vegetables">vegetables</option>
-      <option value="Meat">meat</option>
-      <option value="Grains">grains</option>
-      <option value="Dairy">dairy</option>
-      <option value="Snack">snack</option>
-      <option value="Dessert">dessert</option>
-    </select>
-  </label>
-</div>
-
-<button class="button button-block button-clear" ng-click="submit()">
-  Find your food!
-</button>
-

@@ -1,5 +1,16 @@
-<div>
-	<div ng-repeat="food in foods">
-	<a  href="#/food/{{food.id}}" class="item item-icon-left">{{food.name}}</a>
+<div  align-title="left" class="bar bar-header bar-light ">
+	<div>
+		<a href="#/" class="button button-clear"><i class="autism-app-largeicon ion-ios-home"></i></a>
+		<a href="#/pecboard" class="button button-clear"><i class=" autism-app-largeicon ion-calendar"></i></a>
+	</div>
+</div >
+<div class="content has-header padding">
+	<div class="row" ng-repeat="food in foods" >
+		<a  href="#/food/{{food.id}}" class=" col col-90 button-clear">{{food.name}}</a>
+		
+		<button class=" col button button-clear" ng-click="togglePecBoard(food)">
+		<i class="icon ion-plus" ng-show="food.pecboard"></i>
+		<i class="icon ion-android-remove"ng-show="!food.pecboard"></i>
+		</button>
 	</div>
 </div>
