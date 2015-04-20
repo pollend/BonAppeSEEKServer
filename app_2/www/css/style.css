@@ -13,14 +13,13 @@
 }
 
 .food-suggestion-item{
-
 	margin-bottom:  6px;
 }
 
 .button-gordita{
+	    src: url(../img/Fonts/Cicle_Gordita.ttf);
 	font-family: cicle_gordita;
     color: #0096BB !important;
-    src: url(../img/Fonts/Cicle_Gordita.ttf);
     font-size: 50px;
     text-shadow: -1px 1px #009AEA;
 }
@@ -38,5 +37,10 @@
 }
 
 .header-title{
+	src: url(../img/Fonts/Cicle_Gordita.ttf);
+	font-family: cicle_gordita;
+	 color: #0096BB !important;
+	text-shadow: -1px 1px #009AEA;
+	    font-size: 45px;
 	text-align: center;
 }
