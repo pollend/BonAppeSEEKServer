@@ -4,12 +4,17 @@
 	padding: 0px 2px;
 }
 
-.pane{
-	 background: url("../img/App Images/Wooden background.png") no-repeat center center fixed; 
+.main-container{
+	 background: url("../img/App Images/wooden background.png") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.food-suggestion-item{
+
+	margin-bottom:  6px;
 }
 
 .button-gordita{

@@ -25,6 +25,9 @@ function populateTable() {
         });
     });   
     createTitle();
+    if (localStorage.getItem("pecboard") === null)
+        localStorage.setItem("pecboard", JSON.stringify(['', '', '', '']));
+
 }
 
 function clickedRow(id) {

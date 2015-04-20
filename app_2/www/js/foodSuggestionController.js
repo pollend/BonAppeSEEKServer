@@ -1,4 +1,4 @@
-app.controller("foodSuggestionController", function($scope, $stateParams, $location) {
+app.controller("foodSuggestionController", function($window, $scope, $stateParams, $location) {
     $scope.foods = [{
         name: "item 1",
         id: 1,
@@ -21,7 +21,11 @@ app.controller("foodSuggestionController", function($scope, $stateParams, $locat
         pecboard: true
     }, ];
 
+    $scope.viewFoodItem = function(id) {
+        $location.url("/food/" + id);
+    }
     $scope.togglePecBoard = function(food) {
+
         if (food.pecboard)
             food.pecboard = false;
         else
