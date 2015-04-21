@@ -5,7 +5,7 @@ app.controller("criteriaController", function($scope, $stateParams, $location) {
     }
 
     $scope.updateSpecification = function() {
-        if ($scope.characteristic == "Texture") {
+        if ($scope.characteristic.term == "Texture") {
             $scope.specifications = [{
                 value: "Dry",
                 id: 1
@@ -23,7 +23,7 @@ app.controller("criteriaController", function($scope, $stateParams, $location) {
                 id: 5
             }];
 
-        } else if ($scope.characteristic == "Taste") {
+        } else if ($scope.characteristic.term == "Taste") {
             $scope.specifications = [{
                 value: "Sweet",
                 id: 6
@@ -38,7 +38,7 @@ app.controller("criteriaController", function($scope, $stateParams, $location) {
                 id: 9
             }];
 
-        } else if ($scope.characteristic == "Color") {
+        } else if ($scope.characteristic.term == "Color") {
             $scope.specifications = [{
                 value: "Red",
                 id: 10
