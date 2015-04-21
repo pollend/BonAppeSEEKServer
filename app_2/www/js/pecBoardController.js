@@ -1,10 +1,11 @@
 app.controller("pecBoardController", function($window, $scope, $stateParams, $location) {
     var pecboard_food = JSON.parse($window.localStorage.getItem("food"));
     $scope.pecBoardItems = pecboard_food;
+    $scope.keys = Object.keys($scope.pecBoardItems);
 
-    $scope.onDropComplete = function(data, evt) {
-        console.log("drag success, data:", evt);
-        $scope.pecBoardItems[data].x = evt.x;
-        $scope.pecBoardItems[data].y = evt.y;
+    $scope.whatIWant = "___________";
+
+    $scope.changeSelected = function(selected) {
+        $scope.whatIWant = selected;
     }
 });

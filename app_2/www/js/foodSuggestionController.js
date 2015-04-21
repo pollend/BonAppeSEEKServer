@@ -2,6 +2,8 @@ app.controller("foodSuggestionController", function($window, $http, $scope, $sta
     $scope.foods = {};
 
     var pecboard_food = JSON.parse($window.localStorage.getItem("food"));
+    if (!pecboard_food)
+        pecboard_food = {};
 
     $http.get(URL + 'rest/food?mealId=' + $stateParams.meal + '&featureId=' + $stateParams.feature, {}).
     success(function(data, status, headers, config) {
