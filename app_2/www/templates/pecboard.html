@@ -4,7 +4,12 @@
 		<button ng-submit="" class="button button-clear"><i class="autism-app-largeicon ion-ios-keypad"></i></button>
 	</div>
 </div >
-<ion-content class="main-container" >
-<div class="content has-header padding">
+<ion-content class="main-container" style="positive:relative"  ng-drop="true" ng-drop-success="onDropComplete($data,$event)" >
+<div class="content has-header padding" >
+	<div  ng-repeat="(key,value) in pecBoardItems" ng-drag-data="{{key}}" id="{{pecBoardItems[key].id}}" ng-drag="true" >
+	<div  style="position:aboslute; left:{{pecBoardItems[key].x}};top:{{pecBoardItems[key].x}}">
+		{{pecBoardItems[key].name}}
+		</div>
+	</div>
 </div>
 </ion-content>
