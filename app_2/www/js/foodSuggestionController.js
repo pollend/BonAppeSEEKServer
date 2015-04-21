@@ -1,4 +1,4 @@
-app.controller("foodSuggestionController", function($window, $scope, $stateParams, $location) {
+app.controller("foodSuggestionController", function($window, $http, $scope, $stateParams, $location) {
     $scope.foods = [{
         name: "item 1",
         id: 1,
@@ -20,6 +20,19 @@ app.controller("foodSuggestionController", function($window, $scope, $stateParam
         id: 5,
         pecboard: true
     }, ];
+
+
+    $http.post(URL + '/rest/food', {
+        mealId: $stateParams.meal,
+        featureId: $stateParams.feature
+    }).
+    success(function(data, status, headers, config) {
+        console.log(data);
+    }).
+    error(function(data, status, headers, config) {
+
+    });
+
 
     $scope.viewFoodItem = function(id) {
         $location.url("/food/" + id);
