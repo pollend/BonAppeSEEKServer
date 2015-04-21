@@ -32,7 +32,8 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
 
     $stateProvider.state('pecboard', {
         url: "/pecboard",
-        templateUrl: "templates/pecboard.html"
+        templateUrl: "templates/pecboard.html",
+        controller: "pecBoardController"
     });
 
     $stateProvider.state('criteria', {
