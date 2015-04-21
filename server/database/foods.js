@@ -181,19 +181,17 @@ var _getFoodItemsByFeatureAndMeal = function(feature, meal, callback) {
 
     __db.getConnection(function(err, connection) {
         if (table.checkError(err, connection, callback)) {
-            connection.query("SELECT foods.* FROM foods \
-                INNER JOIN relationFoodsFeatures ON relationFoodsFeatures.foodId = foods.id \
-                INNER JOIN relationFoodsMeals ON relationFoodsMeals.foodId = foods.id  \
-                WHERE relationFoodsFeatures.featureId = ? AND relationFoodsMeals.mealId = ?", [features, meal], function(err, results) {
-                if (table.checkError(err, connection, callback)) {
-                    var lfoods = [];
-                    for (var x = 0; x < results.length; x++) {
-                        lfoods.push(new food(results[x]));
+            connection.query("SELECT foods.* FROM (foods INNER JOIN relationFoodsFeatures ON relationFoodsFeatures.foodId = foods.id INNER JOIN relationFoodsMeals ON relationFoodsMeals.foodId = foods.id)  WHERE relationFoodsFeatures.featureId = ? AND relationFoodsMeals.mealId = ?;", [feature, meal],
+                function(err, results) {
+                    if (table.checkError(err, connection, callback)) {
+                        var lfoods = [];
+                        for (var x = 0; x < results.length; x++) {
+                            lfoods.push(new food(results[x]));
+                        }
+                        callback(lfoods);
+                        connection.release();
                     }
-                    callback(lfoods);
-                    connection.release();
-                }
-            });
+                });
         }
 
     });

@@ -61,9 +61,9 @@ food.prototype.output = function(callback, req) {
             } else callback(errors.custom(error));
         });
     } else if (req.query.hasOwnProperty("mealId") && req.query.hasOwnProperty("featureId")) {
-        foods.featureAndMeal(req.query.featureId, req.query.mealId, function(result, error) {
+        foods.featureAndMeal(req.query.featureId, req.query.mealId, function(results, error) {
             if (!error) {
-                if (result) {
+                if (results) {
                     callback(table.entriresToJson(results));
                 } else callback(errors.empty);
             } else callback(errors.custom(error));
