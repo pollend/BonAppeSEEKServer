@@ -1,4 +1,4 @@
-<div class="main-container">
+<ion-content class="main-container" >
 	<div  align-title="left" class="bar bar-header bar-light ">
 		<div>
 			<a href="#/" class="button button-clear"><i class="autism-app-largeicon ion-ios-home"></i></a>
@@ -14,7 +14,7 @@
 			<i class="icon ion-plus" ng-show="food.pecboard"></i>
 			<i class="icon ion-android-remove"ng-show="!food.pecboard"></i>
 			</button-->
-			test
+			{{food.name}}
 			<button class="  button button-clear" ng-click="togglePecBoard(food); $event.stopPropagation();" >
 			<i class="icon ion-plus" ng-show="food.pecboard"></i>
 			<i class="icon ion-minus"ng-show="!food.pecboard"></i>
@@ -22,4 +22,4 @@
 		<!--/div-->
 	</div>
 </div>
-</div>
+</ion-content>

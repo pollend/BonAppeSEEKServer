@@ -1,8 +1,8 @@
 var _createRest = function(interfaces, id, app) {
 
-    app.post("/rest/" + interfaces[id].pageId(), function(req, res) {
-        req.session.test = "asdf";
-        console.log(req.query);
+    app.get("/rest/" + interfaces[id].pageId(), function(req, res) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
 
         interfaces[id].output(function(json) {
             try {

@@ -5,55 +5,58 @@ app.controller("criteriaController", function($scope, $stateParams, $location) {
     }
 
     $scope.updateSpecification = function() {
-        if ($scope.characteristic == "Texture") {
+        if ($scope.characteristic.term == "Texture") {
             $scope.specifications = [{
                 value: "Dry",
-                id: 0
-            }, {
-                value: "Liquid",
                 id: 1
             }, {
-                value: "Chewy",
+                value: "Liquid",
                 id: 2
             }, {
-                value: "Crunchy",
+                value: "Chewy",
                 id: 3
             }, {
-                value: "Soft",
+                value: "Crunchy",
                 id: 4
+            }, {
+                value: "Soft",
+                id: 5
             }];
 
-        } else if ($scope.characteristic == "Taste") {
+        } else if ($scope.characteristic.term == "Taste") {
             $scope.specifications = [{
                 value: "Sweet",
-                id: 5
-            }, {
-                value: "Sour",
                 id: 6
             }, {
-                value: "Salty",
+                value: "Sour",
                 id: 7
             }, {
-                value: "Bitter",
+                value: "Salty",
                 id: 8
+            }, {
+                value: "Bitter",
+                id: 9
             }];
 
-        } else if ($scope.characteristic == "Color") {
+        } else if ($scope.characteristic.term == "Color") {
             $scope.specifications = [{
                 value: "Red",
-                id: 9
-            }, {
-                value: "Orange",
                 id: 10
             }, {
-                value: "Yellow",
+                value: "Orange",
                 id: 11
             }, {
-                value: "Green",
+                value: "Yellow",
                 id: 12
             }, {
-                value: "White",
+                value: "Green",
                 id: 13
+            }, {
+                value: "White",
+                id: 14
+            }, {
+                value: "Brown",
+                id: 15
             }];
 
         }

@@ -11,13 +11,13 @@ function generatePage() {
         if (i === 1)
             imgAdd += '<br>';
     }
-
+    /*
     // testing here
-    imgAdd += "<img src=\"img/apple.png\" id=\"single\"/>";
-    imgAdd += "<img src=\"img/apple.png\" id=\"single\"/>";
-    imgAdd += "<br>";
+    imgAdd += "<img src=\"img/apple.png\" id=\"single\"/>" ; 
+    imgAdd += "<img src=\"img/apple.png\" id=\"single\"/>"  ;
+    imgAdd+= "<br>";
     imgAdd += "<img src=\"img/cork.jpg\" id=\"single\"/style='opacity:0'>";
     imgAdd += "<img src=\"img/cork.jpg\" id=\"single\"/style='opacity:0'>";
-
+    */
     $('#images').append(imgAdd);
 }

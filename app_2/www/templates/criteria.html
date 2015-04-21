@@ -1,8 +1,8 @@
-<div class="main-container">
+
 <div  align-title="left" class="bar bar-header bar-light">
  <a href="#/pecboard" class="button button-clear"><i class="ion-calendar"></i></a>
 </div >
-
+<ion-content class="main-container" >
 <div class="content has-header padding">
   <h3 class="header-title">
     Select your criteria
@@ -13,7 +13,7 @@
       <div class="input-label">
         Select a food characteristic
       </div>
-      <select ng-model="characteristic" ng-change="updateSpecification()">
+      <select ng-model="$parent.characteristic.term" ng-change="updateSpecification()">
         <option value="Texture">Texture</option>
         <option value="Taste">Taste</option>
         <option value="Color">Color</option>
@@ -27,7 +27,7 @@
       <div class="input-label">
        Specifically
       </div>
-      <select ng-model="specifically">
+      <select ng-model="$parent.specifically">
          <option ng-repeat="specfic in specifications"  value="{{specfic.id}}"> {{specfic.value}}</option>
       </select>
     </label>
@@ -39,7 +39,7 @@
       <div class="input-label">
        Meal
       </div>
-      <select ng-model="meal">
+      <select ng-model="$parent.meal">
         <option></option>
         <option value="1">fruits</option>
         <option value="2">vegetables</option>
@@ -56,4 +56,4 @@
     Find your food!
   </button>
 </div>
-</div>
+</ion-content>
