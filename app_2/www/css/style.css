@@ -25,22 +25,51 @@
 }
 
 .header-image{
-	width: 100%;
+	width: 50%;
 	max-width: 700px;
-	margin: 0px auto;
-	position:  relative;
+  margin: 0px auto;
+  position:  relative;
+	
 }
 .header-image img{
 	width: 100%;
 	height: auto;
-	
+
 }
 
 .header-title{
 	src: url(../img/Fonts/Cicle_Gordita.ttf);
 	font-family: cicle_gordita;
-	 color: #0096BB !important;
+	 color: white !important;
 	text-shadow: -1px 1px #009AEA;
 	    font-size: 45px;
 	text-align: center;
+}
+
+
+#info{
+
+  background-color: rgba(255, 255, 255 , 0.5);
+  color: black;
+  padding: 10px;
+  margin: 10px;
+}
+
+#info-content {
+  src: url(../img/Fonts/Cicle_Gordita.ttf);
+  font-family: cicle_gordita;
+  opacity: 1.0;
+  font-size: 20px;
+  line-height: 1.4em;
+}
+
+#info-content p {
+  font-family: arial;
+}
+
+.info-title {
+src: url(../img/Fonts/Cicle_Gordita.ttf);
+  font-family: cicle_gordita;
+  font-size: 32px; 
+  margin-top: 0px;
 }
