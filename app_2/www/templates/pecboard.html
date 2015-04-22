@@ -7,24 +7,29 @@
 <ion-content class="main-container" style="positive:relative"  ng-drop="true" ng-drop-success="onDropComplete($data,$event)" >
 <div class="content has-header padding" >
 	<div ng-repeat="(key,value) in pecBoardItems track by $index" ng-if="$index%2===0" class="row">		
-		<div class="col col-50 food-item" ng-click="changeSelected(pecBoardItems[keys[$index]].name)">
-			<div class="item item-divider">
-				{{pecBoardItems[keys[$index]].name}}
-			</div>
-			<div class="item item-text-wrap">
-				<img style="width:100%;height:auto" src="{{pecBoardItems[keys[$index]].image}}"/>
+		<div class="col col-50" ng-click="changeSelected(pecBoardItems[keys[$index]])">
+			<div ng-class="{selected: pecBoardItems[keys[$index]].active}" class="food-item">
+				<div class="item item-divider">
+					{{pecBoardItems[keys[$index]].name}}
+				</div>
+				<div class="item item-text-wrap">
+					<img style="width:100%;height:auto" src="{{pecBoardItems[keys[$index]].image}}"/>
+				</div>
 			</div>
 		</div>
-		<div class="col food-item" ng-click="changeSelected(pecBoardItems[keys[$index+1]].name)">
-			<div class="item item-divider">
-				{{pecBoardItems[keys[$index+1]].name}}
-			</div>
-			<div class="item item-text-wrap">
-				<img style="width:100%;height:auto" src="{{pecBoardItems[keys[$index+1]].image}}"/>
+		<div class="col" ng-click="changeSelected(pecBoardItems[keys[$index+1]])">
+			<div ng-class="{selected: pecBoardItems[keys[$index+1]].active}" class="food-item">
+				<div class="item item-divider">
+					{{pecBoardItems[keys[$index+1]].name}}
+				</div>
+				<div class="item item-text-wrap">
+					<img style="width:100%;height:auto" src="{{pecBoardItems[keys[$index+1]].image}}"/>
+				</div>
 			</div>
 		</div>
 	</div>
-<div> I want {{whatIWant}}</div>
+<h3 class="header-title" style="margin-top: 0px; margin-bottom: 30px">
+ I want {{selected.name}}</h3>
 </div>
 
 </ion-content>

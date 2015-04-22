@@ -3,9 +3,12 @@ app.controller("pecBoardController", function($window, $scope, $stateParams, $lo
     $scope.pecBoardItems = pecboard_food;
     $scope.keys = Object.keys($scope.pecBoardItems);
 
-    $scope.whatIWant = "___________";
+    $scope.selected = {};
+    $scope.selected.name = "________";
 
     $scope.changeSelected = function(selected) {
-        $scope.whatIWant = selected;
+        $scope.selected.active = false;
+        $scope.selected = selected;
+        $scope.selected.active = true;
     }
 });
