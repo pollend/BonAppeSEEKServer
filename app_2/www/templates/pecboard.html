@@ -1,30 +1,32 @@
 <div  align-title="left" class="bar bar-header bar-light ">
 	<div>
 		<a href="#/" class="button button-clear"><i class="autism-app-largeicon ion-ios-home"></i></a>
-		<button ng-submit="" class="button button-clear"><i class="autism-app-largeicon ion-ios-keypad"></i></button>
+		<!--button ng-submit="" class="button button-clear"><i class="autism-app-largeicon ion-ios-keypad"></i></button-->
 	</div>
 </div >
 <ion-content class="main-container" style="positive:relative"  ng-drop="true" ng-drop-success="onDropComplete($data,$event)" >
 <div class="content has-header padding" >
-	<div ng-repeat="(key,value) in pecBoardItems track by $index" ng-if="$index%2===0" class="row">		
+	<div ng-repeat="(key,value) in pecBoardItems track by $index |  filter: foodItemFilter" ng-if="$index%2===0" class="row">		
 		<div class="col col-50" ng-click="changeSelected(pecBoardItems[keys[$index]])">
 			<div ng-class="{selected: pecBoardItems[keys[$index]].active}" class="food-item">
-				<div class="item item-divider">
+				<!--div class="item item-divider">
 					{{pecBoardItems[keys[$index]].name}}
 				</div>
-				<div class="item item-text-wrap">
+				<div class="item item-text-wrap"-->
+					<i class="remove ion-close" ng-click="removeItem(pecBoardItems[keys[$index]])"></i>
 					<img style="width:100%;height:auto" src="{{pecBoardItems[keys[$index]].image}}"/>
-				</div>
+				<!--/div-->
 			</div>
 		</div>
-		<div class="col" ng-click="changeSelected(pecBoardItems[keys[$index+1]])">
+		<div class="col" ng-if="pecBoardItems[keys[$index+1]]" ng-click="changeSelected(pecBoardItems[keys[$index+1]])">
 			<div ng-class="{selected: pecBoardItems[keys[$index+1]].active}" class="food-item">
-				<div class="item item-divider">
+				<!--div class="item item-divider">
 					{{pecBoardItems[keys[$index+1]].name}}
 				</div>
-				<div class="item item-text-wrap">
+				<div class="item item-text-wrap"-->
+					<i class="remove ion-close" ng-click="removeItem(pecBoardItems[keys[$index+1]])"></i>
 					<img style="width:100%;height:auto" src="{{pecBoardItems[keys[$index+1]].image}}"/>
-				</div>
+				<!--/div-->
 			</div>
 		</div>
 	</div>
