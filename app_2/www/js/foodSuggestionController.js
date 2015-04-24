@@ -31,6 +31,14 @@ app.controller("foodSuggestionController", function($window, $http, $scope, $sta
     $scope.viewFoodItem = function(id) {
         $location.url("/food/" + id);
     }
+
+    $scope.hasEntires = function() {
+        if (Object.keys($scope.foods).length > 0)
+            return true;
+        return false;
+
+    }
+
     $scope.togglePecBoard = function(key, food) {
         var data = $window.localStorage.getItem("food");
         var out;
@@ -49,4 +57,5 @@ app.controller("foodSuggestionController", function($window, $http, $scope, $sta
         }
         $window.localStorage.setItem("food", JSON.stringify(out));
     }
+
 });
