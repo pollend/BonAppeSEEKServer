@@ -1,4 +1,12 @@
-# FoodSuggestion
+# BonAppeSEEKServer
+
+-------------------
+#Introduction
+
+Many children often have specific preferences with what foods he or she consumes, which makes food selection extremely difficult for parents. For instance, a child may only eat cuisine that are dry in texture, or salty in teaste, or cannot mix textures at all. Because he or she is picky to eating a limited number of foods, the child may not receive necessary nutrients to maintain a healthy body and mind
+
+The Actual app is in another repository : https://github.com/pollend/BonAppeSEEKApp
+
 
 #Installation
 ------------------------
